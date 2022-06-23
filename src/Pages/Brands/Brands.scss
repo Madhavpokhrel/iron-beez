@@ -1,0 +1,16 @@
+.app__brand {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 100%;
+    flex: 1;
+}
+
+.app__brand-head {
+    text-align: center;
+    text-transform: capitalize;
+}
+
+.app__brand-heading {
+    font-family: 'Dancing Script', cursive;
+}
