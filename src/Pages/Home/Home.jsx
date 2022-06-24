@@ -4,7 +4,7 @@ import { images } from "../../constants";
 import { RecomendedForYou } from '../../components'
 
 import "./Home.scss";
-import { Brands } from "..";
+import { Brands, Ads } from "..";
 
 const Home = () => {
   return (
@@ -44,6 +44,7 @@ const Home = () => {
       </motion.div>
       <RecomendedForYou />
       <Brands />
+      <Ads />
     </div>
   );
 };

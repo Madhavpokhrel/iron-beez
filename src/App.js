@@ -16,6 +16,7 @@ function App() {
         <Route path="/finance" element={<Finance />} />
       </Routes>
       <Footer />
+      
     </>
   );
 }
