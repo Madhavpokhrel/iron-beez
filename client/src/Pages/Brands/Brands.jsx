@@ -29,11 +29,11 @@ const Brands = () => {
       <motion.div
         // animate={{ animateCard }}
         transition={{ duration: 0.5, delayChildren: 0.5 }}
-        className="app__rfy-card"
+        className="app__brand-card"
       >
         {brandList.map((brand, index) => (
-          <div className="app__rfy-item app__flex" key={index}>
-            <div className="app__rfy-img app__flex">
+          <div className="app__brand-item app__flex" key={index}>
+            <div className="app__brand-img app__flex">
               <img src={brand.imageUrl} alt={brand.text} />
               <motion.div
                 whileHover={{ opacity: [0, 1] }}
@@ -42,7 +42,7 @@ const Brands = () => {
                   ease: "easeInOut",
                   staggerChildren: 0.5,
                 }}
-                className="app__rfy-hover app__flex"
+                className="app__brand-hover app__flex"
               >
                 {/* <a href="#" target="_blank" rel="noreferrer">
                   <motion.div
@@ -56,7 +56,7 @@ const Brands = () => {
                 </a> */}
               </motion.div>
             </div>
-            <div className="app__rfy-content app__flex">
+            <div className="app__brand-content app__flex">
               <h4 className="bold-text">{brand.text}</h4>
             </div>
           </div>

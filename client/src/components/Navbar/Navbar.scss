@@ -14,56 +14,6 @@
   }
 }
 
-.app__navbar-links {
-  flex: 1;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  list-style: none;
-
-  li {
-    margin: 0 1rem;
-    cursor: pointer;
-
-    flex-direction: column;
-
-    div {
-      width: 5px;
-      height: 5px;
-      background: transparent;
-      border-radius: 50%;
-
-      margin-bottom: 5px;
-    }
-
-    a {
-      color: black;
-      text-decoration: none;
-      flex-direction: column;
-
-      text-transform: uppercase;
-      font-weight: 500;
-
-      transition: all 0.3s ease-in-out;
-
-      &:hover {
-        color: #1ab57e;
-      }
-    }
-
-    &:hover {
-      div {
-        background: #1ab57e;
-      }
-    }
-  }
-
-  @media screen and (max-width: 900px) {
-    display: none;
-  }
-}
-
 .app__navbar-menu {
   width: 35px;
   height: 35px;
@@ -161,7 +111,7 @@
   justify-content: space-between;
   align-items: center;
 
-  padding: 1rem 20rem;
+  padding: 1rem 15rem;
   background: #bbe8d7;
   // box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
   backdrop-filter: blur(4px);
@@ -188,7 +138,6 @@
 }
 
 .app__navbar-links {
-  flex: 1;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -217,6 +166,7 @@
 
       text-transform: uppercase;
       font-weight: 600;
+      font-size: 15px;
 
       transition: all 0.3s ease-in-out;
 
@@ -407,45 +357,7 @@
   border: 1px solid gray;
 }
 
-#con-email {
-  padding-left: 10px;
-  margin-left: 15px;
-  outline: none;
-  padding-left: 10px;
-  width: 190px;
-  border-radius: 10px;
-  outline: none;
-  border: 1px solid gray;
-}
 
-
-.form-pwd {
-  display: flex;
-  flex-direction: row;
-  width: 100%;
-  height: 40px;
-  margin-bottom: 10px;
-}
-
-#pwd {
-  outline: none;
-  padding-left: 10px;
-  width: 190px;
-  border-radius: 10px;
-  outline: none;
-  border: 1px solid gray;
-}
-
-
-#con-pwd {
-  padding-left: 10px;
-  margin-left: 15px;
-  outline: none;
-  width: 190px;
-  border-radius: 10px;
-  outline: none;
-  border: 1px solid gray;
-}
 
 .form-btn {
   margin: 10px;
@@ -484,18 +396,6 @@
       cursor: pointer;
     }
   }
-}
-
-.app__login-main {
-  position: absolute;
-  top: 20%;
-  left: 35%;
-  width: 380px;
-  padding: 20px 30px;
-  // transform: translate(-50%, -50%);
-  background-color: white;
-  box-shadow: 1px 1px 2px 2px rgb(190, 186, 186);
-  border-radius: 10px;
 }
 
 .login__form {
@@ -668,6 +568,81 @@
       padding-left: 30px;
       padding-right: 30px;
 
+      &:hover {
+        background-color: #1ab57e;
+      }
+    }
+
+  }
+
+}
+
+.app__otp-main {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  h1 {
+    text-align: center;
+    color: #ec901a;
+    font-size: 35px;
+    text-shadow: 1px 1px 1px #919191;
+    font-family: Arial, Helvetica, sans-serif;
+  }
+
+  p {
+    padding-top: 15px;
+    padding-bottom: 10px;
+  }
+
+  .app__signup-button {
+
+    display: flex;
+    justify-content: center;
+    margin-top: 15px;
+
+    Button {
+      background-color: #ec901a;
+      padding-left: 30px;
+      padding-right: 30px;
+      
+      &:hover {
+        background-color: #1ab57e;
+      }
+    }
+
+  }
+
+}
+
+.app__login-main {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  h1 {
+    text-align: center;
+    color: #ec901a;
+    font-size: 35px;
+    text-shadow: 1px 1px 1px #919191;
+    font-family: Arial, Helvetica, sans-serif;
+  }
+
+  .app__login-space {
+    margin-top: 20px;
+  }
+
+  .app__signin-button {
+
+    display: flex;
+    justify-content: center;
+    margin-top: 15px;
+
+    Button {
+      background-color: #ec901a;
+      padding-left: 30px;
+      padding-right: 30px;
+      
       &:hover {
         background-color: #1ab57e;
       }

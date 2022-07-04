@@ -15,14 +15,14 @@
     font-family: 'Dancing Script', cursive;
 }
 
-.app__rfy-card {
+.app__brand-card {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;
 
-    .app__rfy-item {
-        width: 270px;
+    .app__brand-item {
+        width: 370px;
         flex-direction: column;
         margin: 2rem;
         padding: 1rem;
@@ -32,6 +32,7 @@
 
         cursor: pointer;
         transition: all 0.3 ease;
+        box-shadow: 0 0 15px rgba(0,0,0,0.2);
 
         &:hover {
             box-shadow: 0 0 25px rgba(0,0,0,0.2);
@@ -51,7 +52,7 @@
     }
 }
 
-.app__rfy-img {
+.app__brand-img {
     width: 100%;
     height: 230px;
     position: relative;
@@ -68,7 +69,7 @@
 
 }
 
-.app__rfy-hover {
+.app__brand-hover {
     position: absolute;
     top: 0;
     left: 0;
@@ -105,7 +106,7 @@
     }    
 }
 
-.app__rfy-content {
+.app__brand-content {
     padding: 0.5rem;
     width: 100%;
     position: relative;
@@ -116,15 +117,6 @@
         line-height: 1.5;
     }
 
-    .app__rfy-price {
-        position: absolute;
-        padding: 0.5rem 1rem;
-        border-radius: 10px;
-        background-color: #fff;
-        top: -25px;
-        justify-content: center;
-        align-items: center;
-    }
 }
 
 .bold-text {

@@ -31,14 +31,6 @@ const recomended = [
     year: "2012",
     price: 100,
   },
-  {
-    imageUrl:
-      "https://img.forconstructionpros.com/files/base/acbm/fcp/image/2021/08/JD__210G_LC_.611c797165850.png?auto=format%2Ccompress",
-    name: "Text",
-    model: "00qwert",
-    year: "2012",
-    price: 100,
-  },
 ];
 
 const RecomendedForYou = () => {
@@ -46,10 +38,7 @@ const RecomendedForYou = () => {
   return (
     <div className="app__works">
       <div className="app__rfy">
-        <h4>Recomended for you</h4>
-        <h4>
-          See all <AiOutlineArrowRight />
-        </h4>
+        <h1>Recomended for you</h1>
       </div>
 
       <motion.div

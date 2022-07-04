@@ -5,12 +5,18 @@
 }
 
 .app__rfy {
-    display: flex;
+
     width: 100%;
     flex-direction: row;
     padding: 0px 135px;
     padding-top: 30px;
-    justify-content: space-between;
+    
+    h1 {
+        text-align: center;
+        color: #ec901a;
+        font-weight: 900;
+        font-size: 70px;
+    }
 }
 
 .app__flex {
@@ -26,14 +32,14 @@
     align-items: center;
 
     .app__rfy-item {
-        width: 270px;
+        width: 370px;
         flex-direction: column;
         margin: 2rem;
         padding: 1rem;
         border-bottom: 0.5rem;
         background-color: #fff;
         color: black;
-
+        box-shadow: 0 0 15px rgba(0,0,0,0.2);
         cursor: pointer;
         transition: all 0.3 ease;
 

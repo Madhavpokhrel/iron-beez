@@ -11,7 +11,6 @@ const userSchema = mongoose.Schema({
     },
     phoneNumber: {
         type: String,
-        required: true
     },
     email: {
         type: String,
@@ -21,6 +20,19 @@ const userSchema = mongoose.Schema({
         type: String,
         required: true
     },
+    zipCode: {
+        type: String,
+        required: true
+    },
+    accountActive: {
+        type: Boolean,
+        default: false
+    },
+    activeCode: {
+        type: String,
+        required: true
+    },
+    token: String,
     createdAt: {
         type: Date,
         default: new Date()

@@ -36,7 +36,7 @@ const Home = () => {
           <input
             type="text"
             id="header-search"
-            placeholder="Search blog posts"
+            placeholder="Search heavy equipment"
             name="s" 
           />
           <button>Financing</button>

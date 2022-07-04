@@ -1,45 +1,40 @@
 import User from "../models/user.js";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
-import mongoose from "mongoose";
+import {sendEmail} from "../utils/sendEmail.js";
 
 export const signup = async (req, res) => {
-  User.find({ email: req.body.email })
-    .exec()
-    .then((user) => {
-      if (user.length >= 1) {
-        res.status(409).json({
-          message: "email already exist",
-        });
-      } else {
-        bcrypt.hash(req.body.password, 15, (err, hash) => {
-          if (err) {
-            res.status(500).json({
-              error: err,
-            });
-          } else {
-            const user = new User({
-              firstName: req.body.firstName,
-              lastName: req.body.lastName,
-              phoneNumber: req.body.phoneNumber,
-              email: req.body.email,
-              password: hash,
-            });
-            user
-              .save()
-              .then((result) => {
-                console.log(result);
-                res.status(201).json(result);
-              })
-              .catch((err) => {
-                res.status(500).json({
-                  error: err,
-                });
-              });
-          }
-        });
-      }
-    });
+  const { firstName, lastName, phoneNumber, email, password, zipCode } = req.body;
+
+  try {
+    const oldUser = await User.findOne({ email });
+
+    if (oldUser) return res.status(400).json({ message: "User already exists" });
+
+    const hashedPassword = await bcrypt.hash(password, 12);
+
+    const activeCode = Math.random().toString(36).substring(0, 20);
+    
+    const result = await User.create({firstName, lastName, phoneNumber, email, password: hashedPassword, zipCode, activeCode });
+
+    await sendEmail(
+      email,
+      "Ironbeez",
+      `Dear ${firstName},
+    <br>
+    <p style="font-size: 16px; text-align: justify;">To activate your account. Please <a href="http://localhost:3000/activate?email=${result.email}&activeCode=${activeCode}" target="_blank"> CLICK HERE</a>.</p>
+    
+    <p>Thank you,</p>
+    <p><strong> IronBeez</strong>
+    <br>`
+    );
+
+    res.status(201).json( result );
+  } catch (error) {
+    res.status(500).json({ message: "Something went wrong" });
+    
+    console.log(error);
+  }
 };
 
 export const signin = async (req, res) => {
@@ -48,13 +43,18 @@ export const signin = async (req, res) => {
     .then((user) => {
       if (!user) {
         return res.status(401).json({
-          message: "Auth failed",
+          message: "Email or password is incorrect",
         });
       }
       bcrypt.compare(req.body.password, user.password, (err, result) => {
         if (err) {
           return res.status(401).json({
-            message: "Auth failed",
+            message: "Email or password is incorrect",
+          });
+        }
+        if(result.accountActive == false) {
+          return res.status(401).json({
+            message: "Please activate your account!",
           });
         }
         if (result) {
@@ -68,9 +68,10 @@ export const signin = async (req, res) => {
               expiresIn: "1h",
             }
           );
+          const test = user;
+          test.token = token;
           return res.status(200).json({
-            user:user,
-            token: token,
+            user: test,
           });
         }
         res.status(401).json({
@@ -84,4 +85,19 @@ export const signin = async (req, res) => {
         error: err,
       });
     });
+}
+
+export const activateAccount = async (req, res) => {
+    const activeCode = req.query.activeCode;
+    const email = req.query.email;
+
+    const isEmail = await User.findOne({email});
+
+    if(!isEmail) return res.status(400).json({ message: "Account not activated!" });
+
+    const isAccountActive = await isEmail.accountActive.localeCompare(activeCode);
+
+    if(isAccountActive !== 0) return res.redirect("/account-not-active");
+
+    res.redirect("/accountActive");
 }
