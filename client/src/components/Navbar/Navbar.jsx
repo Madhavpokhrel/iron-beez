@@ -6,6 +6,8 @@ import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 import { DialogContent, DialogContentText, Dialog } from "@mui/material";
 import { useDispatch } from "react-redux";
+import decode from "jwt-decode";
+import * as actionType from "../../constants/actionType";
 
 import "./Navbar.scss";
 import { signin, signup } from "../../actions/auth";
@@ -32,11 +34,24 @@ const Navbar = () => {
   const [user, setUser] = useState(JSON.parse(localStorage.getItem("profile")));
   const dispatch = useDispatch();
 
-  // console.log(setSignInFormData.email);
+  console.log(user);
+
+  const logout = () => {
+    dispatch({ type: actionType.LOGOUT });
+
+    setUser(null);
+  };
 
   useEffect(() => {
     const token = user?.token;
 
+    if (token) {
+      const decodedToken = decode(token);
+
+      if (decodedToken.exp * 1000 < new Date().getTime()) logout();
+    }
+
+    setUser(JSON.parse(localStorage.getItem("profile")));
     // JWT
   }, []);
 
@@ -67,10 +82,8 @@ const Navbar = () => {
     e.preventDefault();
 
     if (checkAuth === "signup") {
-      console.log(formData);
       dispatch(signup(formData));
     } else if (checkAuth === "signin") {
-      console.log(signInFormData);
       dispatch(signin(signInFormData));
     }
   };
@@ -105,13 +118,19 @@ const Navbar = () => {
           <Link to="/finance">finance</Link>
         </li>
         <li style={{ cursor: "auto" }}>|</li>
-        <Button
-          style={{ color: "#ffa500" }}
-          variant="text"
-          onClick={() => handleOpenDialogBox("signin")}
-        >
-          Sign-In
-        </Button>
+
+        {!user ? (
+          <Button
+            variant="contained"
+            onClick={() => handleOpenDialogBox("signin")}
+          >
+            Sign In
+          </Button>
+        ) : (
+          <Button variant="contained" onClick={() => logout()}>
+            Logout
+          </Button>
+        )}
       </ul>
 
       <div className="app__navbar-menu">
@@ -272,7 +291,7 @@ const Navbar = () => {
                   type="email"
                   name="email"
                   required
-                  style={{width: 400}}
+                  style={{ width: 400 }}
                   onChange={handleSignInChange}
                 />
               </div>
@@ -284,7 +303,7 @@ const Navbar = () => {
                   type="password"
                   name="password"
                   required
-                  style={{width: 400}}
+                  style={{ width: 400 }}
                   onChange={handleSignInChange}
                 />
               </div>
@@ -292,7 +311,10 @@ const Navbar = () => {
                 <Button
                   variant="contained"
                   type="submit"
-                  onClick={() => setCheckAuth("signin")}
+                  onClick={() => {
+                    setCheckAuth("signin");
+                    handleCloseDialogBox();
+                  }}
                 >
                   Sign In
                 </Button>

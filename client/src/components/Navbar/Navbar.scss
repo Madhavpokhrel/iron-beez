@@ -185,6 +185,18 @@
     }
   }
 
+  
+    Button{
+      background-color: #ec901a;
+      
+      &:hover {
+        background-color: #1ab57e;
+        cursor: pointer;
+      }
+    }
+    
+  
+
   @media screen and (max-width: 900px) {
     display: none;
   }
@@ -650,4 +662,8 @@
 
   }
 
+}
+
+.swal2-styled.swal2-confirm {
+  background-color: #ec901a;
 }
