@@ -312,8 +312,17 @@ const Navbar = () => {
                   variant="contained"
                   type="submit"
                   onClick={() => {
-                    setCheckAuth("signin");
-                    handleCloseDialogBox();
+                    if (
+                      formData.firstName !== "" &&
+                      formData.lastName !== "" &&
+                      formData.email !== "" &&
+                      formData.password !== "" &&
+                      formData.zipCode !== ""
+                    ) {
+                      setCheckAuth("signin");
+                      handleCloseDialogBox();
+                    }
+                    
                   }}
                 >
                   Sign In
