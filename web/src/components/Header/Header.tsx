@@ -26,7 +26,7 @@ const Header = () => {
             bg={'none'}
             size="sm"
           >
-            <Link to={routes.loginForm()}>Login</Link>
+            <Link to={routes.login()}>Login</Link>
           </Button>
           <Button
             _hover={{ bg: '#D68C45' }}

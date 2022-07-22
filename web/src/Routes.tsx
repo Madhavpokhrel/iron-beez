@@ -30,7 +30,7 @@ const Routes = () => {
       </Set>
       <Set wrap={IronBeezLayout}>
         <Route path="/" page={HomePage} name="home" />
-        <Route path="/login-form" page={LoginFormPage} name="loginForm" />
+        <Route path="/login" page={LoginPage} name="login" />
       </Set>
       <Route notfound page={NotFoundPage} />
     </Router>
