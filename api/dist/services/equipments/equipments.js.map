@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["../../../src/services/equipments/equipments.ts"],
+  "sourcesContent": ["import type { QueryResolvers, MutationResolvers } from 'types/graphql'\n\nimport { db } from 'src/lib/db'\n\nexport const equipments: QueryResolvers['equipments'] = () => {\n  return db.equipment.findMany()\n}\n\nexport const equipment: QueryResolvers['equipment'] = ({ id }) => {\n  return db.equipment.findUnique({\n    where: { id },\n  })\n}\n\nexport const createEquipment: MutationResolvers['createEquipment'] = ({\n  input,\n}) => {\n  return db.equipment.create({\n    data: input,\n  })\n}\n\nexport const updateEquipment: MutationResolvers['updateEquipment'] = ({\n  id,\n  input,\n}) => {\n  return db.equipment.update({\n    data: input,\n    where: { id },\n  })\n}\n\nexport const deleteEquipment: MutationResolvers['deleteEquipment'] = ({\n  id,\n}) => {\n  return db.equipment.delete({\n    where: { id },\n  })\n}\n"],
+  "mappings": ";;;;;;;;;;;;;;;;;AAEA;;;;;;;;;gBAAA;AAEO,MAAM,aAA2C,MAAM;AAC5D,SAAO,aAAG,UAAU,SAAb;AACR;AAEM,MAAM,YAAyC,CAAC;EAAE;MAAS;AAChE,SAAO,aAAG,UAAU,WAAW;IAC7B,OAAO;MAAE;IAAF;EADsB,CAAxB;AAGR;AAEM,MAAM,kBAAwD,CAAC;EACpE;MACI;AACJ,SAAO,aAAG,UAAU,OAAO;IACzB,MAAM;EADmB,CAApB;AAGR;AAEM,MAAM,kBAAwD,CAAC;EACpE;EACA;MACI;AACJ,SAAO,aAAG,UAAU,OAAO;IACzB,MAAM;IACN,OAAO;MAAE;IAAF;EAFkB,CAApB;AAIR;AAEM,MAAM,kBAAwD,CAAC;EACpE;MACI;AACJ,SAAO,aAAG,UAAU,OAAO;IACzB,OAAO;MAAE;IAAF;EADkB,CAApB;AAGR;",
+  "names": []
+}
