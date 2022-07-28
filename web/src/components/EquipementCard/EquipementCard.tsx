@@ -1,4 +1,3 @@
-// import { TimeIcon } from '@chakra-ui/icons'
 import { Image, Box, Flex, Text, HStack, Tooltip } from '@chakra-ui/react'
 import { IoLocationOutline } from 'react-icons/io5'
 import { Equipment } from 'types/graphql'
@@ -6,31 +5,24 @@ import { Equipment } from 'types/graphql'
 const EquipementCard = ({ equipment }: { equipment: Equipment }) => {
   return (
     <>
-      <Box boxShadow="md" p="1rem" m="1rem" borderRadius="7px">
-        <Image width="100%" height="60%" p="15px" src={equipment.image_url} />
+      <Box boxShadow="md" p="10px" m="10px" borderRadius="7px" bgColor="white">
+        <Image width="100%" height="65%" src={equipment.image_url} />
         <Tooltip
           label="2021 Felco 211-50 qqqqq www  eee e rrrrr rr"
           aria-label="A tooltip"
         >
-          <Text
-            noOfLines={1}
-            paddingLeft="1.8rem"
-            paddingBottom="5px"
-            paddingRight="1.8rem"
-            fontWeight="bold"
-          >
+          <Text noOfLines={1} p="5px" pl="10px" fontWeight="bold">
             {equipment.heading}
           </Text>
         </Tooltip>
-        <Box paddingLeft="1rem" paddingBottom="10px" paddingRight="0.5rem">
-          <Flex>
-            <Text color="#949494" fontSize="16px" flex="1.5">
+        <Box>
+          <Flex justifyContent="space-between" pb="10px" pl="5px">
+            <Flex color="#949494" fontSize="16px" flex="1.5">
               <IoLocationOutline size="1.5rem" />
-              {/* {equipment.location} */}
-            </Text>
+              {equipment.location}
+            </Flex>
             <Text color="#949494" fontSize="16px" flex="1">
-              {/* <TimeIcon marginRight="8px" /> */}
-              {/* {equipment.time} */}
+              {equipment.time}
             </Text>
           </Flex>
           <HStack
@@ -44,6 +36,7 @@ const EquipementCard = ({ equipment }: { equipment: Equipment }) => {
             paddingLeft="1rem"
             paddingRight="1rem"
             paddingBottom="0.5rem"
+            justifyContent="space-between"
           >
             <Text color="#949494" fontSize="20px" flex="2">
               Price{' '}

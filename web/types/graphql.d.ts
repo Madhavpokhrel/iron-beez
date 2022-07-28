@@ -21,7 +21,17 @@ export type Scalars = {
 export type CreateEquipmentInput = {
   heading: Scalars['String'];
   image_url: Scalars['String'];
+  location: Scalars['String'];
   price: Scalars['Int'];
+  time: Scalars['String'];
+};
+
+export type CreateRecentlyAddedEquipmentInput = {
+  heading: Scalars['String'];
+  image_url: Scalars['String'];
+  location: Scalars['String'];
+  price: Scalars['Int'];
+  time: Scalars['String'];
 };
 
 export type Equipment = {
@@ -29,14 +39,19 @@ export type Equipment = {
   heading: Scalars['String'];
   id: Scalars['Int'];
   image_url: Scalars['String'];
+  location: Scalars['String'];
   price: Scalars['Int'];
+  time: Scalars['String'];
 };
 
 export type Mutation = {
   __typename?: 'Mutation';
   createEquipment: Equipment;
+  createRecentlyAddedEquipment: RecentlyAddedEquipment;
   deleteEquipment: Equipment;
+  deleteRecentlyAddedEquipment: RecentlyAddedEquipment;
   updateEquipment: Equipment;
+  updateRecentlyAddedEquipment: RecentlyAddedEquipment;
 };
 
 
@@ -45,7 +60,17 @@ export type MutationcreateEquipmentArgs = {
 };
 
 
+export type MutationcreateRecentlyAddedEquipmentArgs = {
+  input: CreateRecentlyAddedEquipmentInput;
+};
+
+
 export type MutationdeleteEquipmentArgs = {
+  id: Scalars['Int'];
+};
+
+
+export type MutationdeleteRecentlyAddedEquipmentArgs = {
   id: Scalars['Int'];
 };
 
@@ -55,16 +80,39 @@ export type MutationupdateEquipmentArgs = {
   input: UpdateEquipmentInput;
 };
 
+
+export type MutationupdateRecentlyAddedEquipmentArgs = {
+  id: Scalars['Int'];
+  input: UpdateRecentlyAddedEquipmentInput;
+};
+
 export type Query = {
   __typename?: 'Query';
   equipment?: Maybe<Equipment>;
   equipments: Array<Equipment>;
+  recentlyAddedEquipment?: Maybe<RecentlyAddedEquipment>;
+  recentlyAddedEquipments: Array<RecentlyAddedEquipment>;
   redwood?: Maybe<Redwood>;
 };
 
 
 export type QueryequipmentArgs = {
   id: Scalars['Int'];
+};
+
+
+export type QueryrecentlyAddedEquipmentArgs = {
+  id: Scalars['Int'];
+};
+
+export type RecentlyAddedEquipment = {
+  __typename?: 'RecentlyAddedEquipment';
+  heading: Scalars['String'];
+  id: Scalars['Int'];
+  image_url: Scalars['String'];
+  location: Scalars['String'];
+  price: Scalars['Int'];
+  time: Scalars['String'];
 };
 
 export type Redwood = {
@@ -77,7 +125,17 @@ export type Redwood = {
 export type UpdateEquipmentInput = {
   heading?: InputMaybe<Scalars['String']>;
   image_url?: InputMaybe<Scalars['String']>;
+  location?: InputMaybe<Scalars['String']>;
   price?: InputMaybe<Scalars['Int']>;
+  time?: InputMaybe<Scalars['String']>;
+};
+
+export type UpdateRecentlyAddedEquipmentInput = {
+  heading?: InputMaybe<Scalars['String']>;
+  image_url?: InputMaybe<Scalars['String']>;
+  location?: InputMaybe<Scalars['String']>;
+  price?: InputMaybe<Scalars['Int']>;
+  time?: InputMaybe<Scalars['String']>;
 };
 
 export type EditEquipmentByIdVariables = Exact<{
@@ -107,12 +165,12 @@ export type FindEquipmentByIdVariables = Exact<{
 }>;
 
 
-export type FindEquipmentById = { __typename?: 'Query', equipment?: { __typename?: 'Equipment', id: number, heading: string, price: number, image_url: string } | null };
+export type FindEquipmentById = { __typename?: 'Query', equipment?: { __typename?: 'Equipment', id: number, heading: string, price: number, image_url: string, location: string, time: string } | null };
 
 export type FindEquipmentsVariables = Exact<{ [key: string]: never; }>;
 
 
-export type FindEquipments = { __typename?: 'Query', equipments: Array<{ __typename?: 'Equipment', id: number, heading: string, price: number, image_url: string }> };
+export type FindEquipments = { __typename?: 'Query', equipments: Array<{ __typename?: 'Equipment', id: number, heading: string, price: number, image_url: string, location: string, time: string }> };
 
 export type CreateEquipmentMutationVariables = Exact<{
   input: CreateEquipmentInput;
@@ -120,3 +178,8 @@ export type CreateEquipmentMutationVariables = Exact<{
 
 
 export type CreateEquipmentMutation = { __typename?: 'Mutation', createEquipment: { __typename?: 'Equipment', id: number } };
+
+export type RecentlyAddedEquipmentsQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type RecentlyAddedEquipmentsQuery = { __typename?: 'Query', equipments: Array<{ __typename?: 'Equipment', id: number, heading: string, price: number, image_url: string, location: string, time: string }> };

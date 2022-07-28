@@ -28,12 +28,20 @@ describe('equipments', () => {
 
   scenario('creates a equipment', async () => {
     const result = await createEquipment({
-      input: { heading: 'String', price: 1303276, image_url: 'String' },
+      input: {
+        heading: 'String',
+        price: 7379293,
+        image_url: 'String',
+        location: 'String',
+        time: 'String',
+      },
     })
 
     expect(result.heading).toEqual('String')
-    expect(result.price).toEqual(1303276)
+    expect(result.price).toEqual(7379293)
     expect(result.image_url).toEqual('String')
+    expect(result.location).toEqual('String')
+    expect(result.time).toEqual('String')
   })
 
   scenario('updates a equipment', async (scenario: StandardScenario) => {

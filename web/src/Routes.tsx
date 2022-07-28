@@ -14,6 +14,7 @@ import IronBeezLayout from 'src/layouts/IronBeezLayout'
 const Routes = () => {
   return (
     <Router>
+      <Route path="/products-detail" page={ProductsDetailPage} name="productsDetail" />
       <Route path="/login" page={LoginPage} name="login" />
 
       <Route path="/signup" page={SignupPage} name="signup" />

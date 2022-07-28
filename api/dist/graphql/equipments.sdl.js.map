@@ -1,7 +1,7 @@
 {
   "version": 3,
   "sources": ["../../src/graphql/equipments.sdl.ts"],
-  "sourcesContent": ["export const schema = gql`\n  type Equipment {\n    id: Int!\n    heading: String!\n    price: Int!\n    image_url: String!\n  }\n\n  type Query {\n    equipments: [Equipment!]! @requireAuth\n    equipment(id: Int!): Equipment @requireAuth\n  }\n\n  input CreateEquipmentInput {\n    heading: String!\n    price: Int!\n    image_url: String!\n  }\n\n  input UpdateEquipmentInput {\n    heading: String\n    price: Int\n    image_url: String\n  }\n\n  type Mutation {\n    createEquipment(input: CreateEquipmentInput!): Equipment! @requireAuth\n    updateEquipment(id: Int!, input: UpdateEquipmentInput!): Equipment!\n      @requireAuth\n    deleteEquipment(id: Int!): Equipment! @requireAuth\n  }\n`\n"],
-  "mappings": ";;;;;;;;;;;;;;;;;;;;;;;;;yBAAsB;AAAf,MAAM,SAAS;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;",
+  "sourcesContent": ["export const schema = gql`\n  type Equipment {\n    id: Int!\n    heading: String!\n    price: Int!\n    image_url: String!\n    location: String!\n    time: String!\n  }\n\n  type Query {\n    equipments: [Equipment!]! @skipAuth\n    equipment(id: Int!): Equipment @requireAuth\n  }\n\n  input CreateEquipmentInput {\n    heading: String!\n    price: Int!\n    image_url: String!\n    location: String!\n    time: String!\n  }\n\n  input UpdateEquipmentInput {\n    heading: String\n    price: Int\n    image_url: String\n    location: String\n    time: String\n  }\n\n  type Mutation {\n    createEquipment(input: CreateEquipmentInput!): Equipment! @requireAuth\n    updateEquipment(id: Int!, input: UpdateEquipmentInput!): Equipment!\n      @requireAuth\n    deleteEquipment(id: Int!): Equipment! @requireAuth\n  }\n`\n"],
+  "mappings": ";;;;;;;;;;;;;;;;;;;;;;;;;yBAAsB;AAAf,MAAM,SAAS;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;",
   "names": []
 }

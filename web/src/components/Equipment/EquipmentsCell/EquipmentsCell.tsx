@@ -12,6 +12,8 @@ export const QUERY = gql`
       heading
       price
       image_url
+      location
+      time
     }
   }
 `
@@ -22,10 +24,7 @@ export const Empty = () => {
   return (
     <div className="rw-text-center">
       {'No equipments yet. '}
-      <Link
-        to={routes.newEquipment()}
-        className="rw-link"
-      >
+      <Link to={routes.newEquipment()} className="rw-link">
         {'Create one?'}
       </Link>
     </div>

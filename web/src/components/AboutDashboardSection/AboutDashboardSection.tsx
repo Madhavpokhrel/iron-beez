@@ -1,35 +1,34 @@
-import { Box, Button, Flex, Image, Text } from '@chakra-ui/react'
+import { Box, Button, Center, Flex, Text } from '@chakra-ui/react'
 import { BiSearch } from 'react-icons/bi'
 
-import About1 from 'src/Image/about-img.png'
+// import About1 from 'src/Image/about-img.png'
 const AboutDashboardSection = () => {
   return (
-    <Box width="100%" height="90vh" position="relative">
-      <Image src={About1} height="100%" width="100%" />
-
+    <Center
+      width="100%"
+      height="90vh"
+      position="relative"
+      bgPos="center"
+      bgSize="cover"
+      bgImage="url('about-img.png')"
+    >
       <Box
         position="absolute"
-        top="23%"
+        top="20%"
         left={{ sm: '20%', md: '4%' }}
-        bgColor="black"
-        opacity="0.5"
+        bgColor="rgb(19, 28, 39, 0.6);"
         color="white"
-        height={{ sm: '30%', lg: '28%', xl: '38%', '2xl': '30%' }}
-        width={{ sm: '60%', md: '47%', lg: '45%', xl: '45%', '2xl': '40%' }}
         borderRadius="7px"
       >
         <Text
-          marginTop="1rem"
-          marginLeft="2rem"
-          marginBottom="1.5rem"
-          opacity="1"
-          fontSize={{ sm: '1.3rem', md: '1.3rem', xl: '1.9rem' }}
+          m="1.5rem"
+          fontSize={{ sm: '1.3rem', md: '1.3rem', xl: '32px' }}
           fontWeight="600"
-          width="80%"
         >
           Reimagining the
-          <span style={{ color: '#D68C45' }}> Heavy Equipment</span> sector to
-          create a seamless transaction experience for today’s digital world
+          <span style={{ color: '#D68C45' }}> Heavy Equipment</span> <br />{' '}
+          sector to create a seamless <br />
+          transaction experience for today’s <br /> digital world
         </Text>
       </Box>
 
@@ -73,6 +72,7 @@ const AboutDashboardSection = () => {
           style={{
             padding: '1rem',
             width: '36%',
+            border: 'none',
           }}
           placeholder="Zip code"
         ></input>
@@ -96,7 +96,7 @@ const AboutDashboardSection = () => {
           </Button>
         </Box>
       </Flex>
-    </Box>
+    </Center>
   )
 }
 

@@ -30,10 +30,12 @@ const schema = import_graphql_tag.default`
     heading: String!
     price: Int!
     image_url: String!
+    location: String!
+    time: String!
   }
 
   type Query {
-    equipments: [Equipment!]! @requireAuth
+    equipments: [Equipment!]! @skipAuth
     equipment(id: Int!): Equipment @requireAuth
   }
 
@@ -41,12 +43,16 @@ const schema = import_graphql_tag.default`
     heading: String!
     price: Int!
     image_url: String!
+    location: String!
+    time: String!
   }
 
   input UpdateEquipmentInput {
     heading: String
     price: Int
     image_url: String
+    location: String
+    time: String
   }
 
   type Mutation {

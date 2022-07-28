@@ -27,17 +27,21 @@ var import_graphql_server = require("@redwoodjs/graphql-server");
 var directives_requireAuth_requireAuth = __toESM(require("../directives/requireAuth/requireAuth"));
 var directives_skipAuth_skipAuth = __toESM(require("../directives/skipAuth/skipAuth"));
 var sdls_equipments_sdl = __toESM(require("../graphql/equipments.sdl"));
+var sdls_recentlyAddedEquipments_sdl = __toESM(require("../graphql/recentlyAddedEquipments.sdl"));
 var import_db = require("../lib/db");
 var import_logger = require("../lib/logger");
 var services_equipments_equipments = __toESM(require("../services/equipments/equipments"));
+var services_recentlyAddedEquipments_recentlyAddedEquipments = __toESM(require("../services/recentlyAddedEquipments/recentlyAddedEquipments"));
 var import_auth = require("../lib/auth");
 let directives = {};
 directives.requireAuth_requireAuth = directives_requireAuth_requireAuth;
 directives.skipAuth_skipAuth = directives_skipAuth_skipAuth;
 let sdls = {};
 sdls.equipments_sdl = sdls_equipments_sdl;
+sdls.recentlyAddedEquipments_sdl = sdls_recentlyAddedEquipments_sdl;
 let services = {};
 services.equipments_equipments = services_equipments_equipments;
+services.recentlyAddedEquipments_recentlyAddedEquipments = services_recentlyAddedEquipments_recentlyAddedEquipments;
 const handler = (0, import_graphql_server.createGraphQLHandler)({
   getCurrentUser: import_auth.getCurrentUser,
   loggerConfig: {

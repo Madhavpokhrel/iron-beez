@@ -16,7 +16,11 @@ import { Link, navigate, routes } from '@redwoodjs/router'
 import { MetaTags } from '@redwoodjs/web'
 import { Toaster } from '@redwoodjs/web/toast'
 import { toast } from '@redwoodjs/web/toast'
-const AuthForm = () => {
+
+type LoginFormProps = {
+  backtosignin: () => void
+}
+const AuthForm = ({ backtosignin }: LoginFormProps) => {
   const { isAuthenticated, signUp } = useAuth()
 
   useEffect(() => {
@@ -229,15 +233,20 @@ const AuthForm = () => {
                     <Text fontWeight={'bold'}>Sign Up</Text>
                   </Submit>
                 </Button>
+
                 <div className="rw-login-link" style={{ marginTop: '1.5rem' }}>
-                  <span>Already have an account?</span>{' '}
-                  <Link
-                    to={routes.login()}
-                    className="rw-link"
-                    style={{ color: '#D68C45', fontWeight: 'bold' }}
-                  >
-                    Signin
-                  </Link>
+                  <HStack>
+                    <span>Already have an account?</span>
+                    <Text
+                      // to={routes.login()}
+                      onClick={backtosignin}
+                      cursor="pointer"
+                      className="rw-link"
+                      style={{ color: '#D68C45', fontWeight: 'bold' }}
+                    >
+                      Signin
+                    </Text>
+                  </HStack>
                 </div>
               </VStack>
             </Form>

@@ -29,4 +29,23 @@ model Equipment {
   heading   String
   price     Int
   image_url String
+  location  String
+  time      String
+}
+
+model Article {
+  id        Int      @id @default(autoincrement())
+  imageUrl  String
+  title     String
+  body      String
+  createdAt DateTime @default(now())
+}
+
+model RecentlyAddedEquipment {
+  id        Int    @id @default(autoincrement())
+  heading   String
+  price     Int
+  image_url String
+  location  String
+  time      String
 }

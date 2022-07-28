@@ -1,5 +1,5 @@
 import { GraphQLResolveInfo, GraphQLScalarType, GraphQLScalarTypeConfig } from 'graphql';
-import { User as PrismaUser, Equipment as PrismaEquipment, Prisma } from '.prisma/client';
+import { User as PrismaUser, Equipment as PrismaEquipment, RecentlyAddedEquipment as PrismaRecentlyAddedEquipment, Prisma } from '.prisma/client';
 import { RedwoodGraphQLContext } from '@redwoodjs/graphql-server/dist/functions/types';
 export type Maybe<T> = T | null;
 export type InputMaybe<T> = Maybe<T>;
@@ -30,7 +30,17 @@ export type Scalars = {
 export type CreateEquipmentInput = {
   heading: Scalars['String'];
   image_url: Scalars['String'];
+  location: Scalars['String'];
   price: Scalars['Int'];
+  time: Scalars['String'];
+};
+
+export type CreateRecentlyAddedEquipmentInput = {
+  heading: Scalars['String'];
+  image_url: Scalars['String'];
+  location: Scalars['String'];
+  price: Scalars['Int'];
+  time: Scalars['String'];
 };
 
 export type Equipment = {
@@ -38,14 +48,19 @@ export type Equipment = {
   heading: Scalars['String'];
   id: Scalars['Int'];
   image_url: Scalars['String'];
+  location: Scalars['String'];
   price: Scalars['Int'];
+  time: Scalars['String'];
 };
 
 export type Mutation = {
   __typename?: 'Mutation';
   createEquipment: Equipment;
+  createRecentlyAddedEquipment: RecentlyAddedEquipment;
   deleteEquipment: Equipment;
+  deleteRecentlyAddedEquipment: RecentlyAddedEquipment;
   updateEquipment: Equipment;
+  updateRecentlyAddedEquipment: RecentlyAddedEquipment;
 };
 
 
@@ -54,7 +69,17 @@ export type MutationcreateEquipmentArgs = {
 };
 
 
+export type MutationcreateRecentlyAddedEquipmentArgs = {
+  input: CreateRecentlyAddedEquipmentInput;
+};
+
+
 export type MutationdeleteEquipmentArgs = {
+  id: Scalars['Int'];
+};
+
+
+export type MutationdeleteRecentlyAddedEquipmentArgs = {
   id: Scalars['Int'];
 };
 
@@ -64,16 +89,39 @@ export type MutationupdateEquipmentArgs = {
   input: UpdateEquipmentInput;
 };
 
+
+export type MutationupdateRecentlyAddedEquipmentArgs = {
+  id: Scalars['Int'];
+  input: UpdateRecentlyAddedEquipmentInput;
+};
+
 export type Query = {
   __typename?: 'Query';
   equipment?: Maybe<Equipment>;
   equipments: Array<Equipment>;
+  recentlyAddedEquipment?: Maybe<RecentlyAddedEquipment>;
+  recentlyAddedEquipments: Array<RecentlyAddedEquipment>;
   redwood?: Maybe<Redwood>;
 };
 
 
 export type QueryequipmentArgs = {
   id: Scalars['Int'];
+};
+
+
+export type QueryrecentlyAddedEquipmentArgs = {
+  id: Scalars['Int'];
+};
+
+export type RecentlyAddedEquipment = {
+  __typename?: 'RecentlyAddedEquipment';
+  heading: Scalars['String'];
+  id: Scalars['Int'];
+  image_url: Scalars['String'];
+  location: Scalars['String'];
+  price: Scalars['Int'];
+  time: Scalars['String'];
 };
 
 export type Redwood = {
@@ -86,7 +134,17 @@ export type Redwood = {
 export type UpdateEquipmentInput = {
   heading?: InputMaybe<Scalars['String']>;
   image_url?: InputMaybe<Scalars['String']>;
+  location?: InputMaybe<Scalars['String']>;
   price?: InputMaybe<Scalars['Int']>;
+  time?: InputMaybe<Scalars['String']>;
+};
+
+export type UpdateRecentlyAddedEquipmentInput = {
+  heading?: InputMaybe<Scalars['String']>;
+  image_url?: InputMaybe<Scalars['String']>;
+  location?: InputMaybe<Scalars['String']>;
+  price?: InputMaybe<Scalars['Int']>;
+  time?: InputMaybe<Scalars['String']>;
 };
 
 
@@ -150,6 +208,7 @@ export type ResolversTypes = {
   BigInt: ResolverTypeWrapper<Scalars['BigInt']>;
   Boolean: ResolverTypeWrapper<Scalars['Boolean']>;
   CreateEquipmentInput: CreateEquipmentInput;
+  CreateRecentlyAddedEquipmentInput: CreateRecentlyAddedEquipmentInput;
   Date: ResolverTypeWrapper<Scalars['Date']>;
   DateTime: ResolverTypeWrapper<Scalars['DateTime']>;
   Equipment: ResolverTypeWrapper<PrismaEquipment>;
@@ -158,10 +217,12 @@ export type ResolversTypes = {
   JSONObject: ResolverTypeWrapper<Scalars['JSONObject']>;
   Mutation: ResolverTypeWrapper<{}>;
   Query: ResolverTypeWrapper<{}>;
+  RecentlyAddedEquipment: ResolverTypeWrapper<PrismaRecentlyAddedEquipment>;
   Redwood: ResolverTypeWrapper<Omit<Redwood, 'currentUser'> & { currentUser?: Maybe<ResolversTypes['JSON']> }>;
   String: ResolverTypeWrapper<Scalars['String']>;
   Time: ResolverTypeWrapper<Scalars['Time']>;
   UpdateEquipmentInput: UpdateEquipmentInput;
+  UpdateRecentlyAddedEquipmentInput: UpdateRecentlyAddedEquipmentInput;
 };
 
 /** Mapping between all available schema types and the resolvers parents */
@@ -169,6 +230,7 @@ export type ResolversParentTypes = {
   BigInt: Scalars['BigInt'];
   Boolean: Scalars['Boolean'];
   CreateEquipmentInput: CreateEquipmentInput;
+  CreateRecentlyAddedEquipmentInput: CreateRecentlyAddedEquipmentInput;
   Date: Scalars['Date'];
   DateTime: Scalars['DateTime'];
   Equipment: PrismaEquipment;
@@ -177,10 +239,12 @@ export type ResolversParentTypes = {
   JSONObject: Scalars['JSONObject'];
   Mutation: {};
   Query: {};
+  RecentlyAddedEquipment: PrismaRecentlyAddedEquipment;
   Redwood: Omit<Redwood, 'currentUser'> & { currentUser?: Maybe<ResolversParentTypes['JSON']> };
   String: Scalars['String'];
   Time: Scalars['Time'];
   UpdateEquipmentInput: UpdateEquipmentInput;
+  UpdateRecentlyAddedEquipmentInput: UpdateRecentlyAddedEquipmentInput;
 };
 
 export type requireAuthDirectiveArgs = {
@@ -209,7 +273,9 @@ export type EquipmentResolvers<ContextType = RedwoodGraphQLContext, ParentType e
   heading?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   id?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
   image_url?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  location?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   price?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
+  time?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
@@ -223,14 +289,29 @@ export interface JSONObjectScalarConfig extends GraphQLScalarTypeConfig<Resolver
 
 export type MutationResolvers<ContextType = RedwoodGraphQLContext, ParentType extends ResolversParentTypes['Mutation'] = ResolversParentTypes['Mutation']> = {
   createEquipment?: Resolver<ResolversTypes['Equipment'], ParentType, ContextType, RequireFields<MutationcreateEquipmentArgs, 'input'>>;
+  createRecentlyAddedEquipment?: Resolver<ResolversTypes['RecentlyAddedEquipment'], ParentType, ContextType, RequireFields<MutationcreateRecentlyAddedEquipmentArgs, 'input'>>;
   deleteEquipment?: Resolver<ResolversTypes['Equipment'], ParentType, ContextType, RequireFields<MutationdeleteEquipmentArgs, 'id'>>;
+  deleteRecentlyAddedEquipment?: Resolver<ResolversTypes['RecentlyAddedEquipment'], ParentType, ContextType, RequireFields<MutationdeleteRecentlyAddedEquipmentArgs, 'id'>>;
   updateEquipment?: Resolver<ResolversTypes['Equipment'], ParentType, ContextType, RequireFields<MutationupdateEquipmentArgs, 'id' | 'input'>>;
+  updateRecentlyAddedEquipment?: Resolver<ResolversTypes['RecentlyAddedEquipment'], ParentType, ContextType, RequireFields<MutationupdateRecentlyAddedEquipmentArgs, 'id' | 'input'>>;
 };
 
 export type QueryResolvers<ContextType = RedwoodGraphQLContext, ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']> = {
   equipment?: Resolver<Maybe<ResolversTypes['Equipment']>, ParentType, ContextType, RequireFields<QueryequipmentArgs, 'id'>>;
   equipments?: Resolver<Array<ResolversTypes['Equipment']>, ParentType, ContextType>;
+  recentlyAddedEquipment?: Resolver<Maybe<ResolversTypes['RecentlyAddedEquipment']>, ParentType, ContextType, RequireFields<QueryrecentlyAddedEquipmentArgs, 'id'>>;
+  recentlyAddedEquipments?: Resolver<Array<ResolversTypes['RecentlyAddedEquipment']>, ParentType, ContextType>;
   redwood?: Resolver<Maybe<ResolversTypes['Redwood']>, ParentType, ContextType>;
+};
+
+export type RecentlyAddedEquipmentResolvers<ContextType = RedwoodGraphQLContext, ParentType extends ResolversParentTypes['RecentlyAddedEquipment'] = ResolversParentTypes['RecentlyAddedEquipment']> = {
+  heading?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  id?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
+  image_url?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  location?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  price?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
+  time?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
 export type RedwoodResolvers<ContextType = RedwoodGraphQLContext, ParentType extends ResolversParentTypes['Redwood'] = ResolversParentTypes['Redwood']> = {
@@ -253,6 +334,7 @@ export type Resolvers<ContextType = RedwoodGraphQLContext> = {
   JSONObject?: GraphQLScalarType;
   Mutation?: MutationResolvers<ContextType>;
   Query?: QueryResolvers<ContextType>;
+  RecentlyAddedEquipment?: RecentlyAddedEquipmentResolvers<ContextType>;
   Redwood?: RedwoodResolvers<ContextType>;
   Time?: GraphQLScalarType;
 };

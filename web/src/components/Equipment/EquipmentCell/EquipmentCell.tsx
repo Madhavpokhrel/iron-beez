@@ -11,6 +11,8 @@ export const QUERY = gql`
       heading
       price
       image_url
+      location
+      time
     }
   }
 `

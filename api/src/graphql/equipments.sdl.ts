@@ -4,10 +4,12 @@ export const schema = gql`
     heading: String!
     price: Int!
     image_url: String!
+    location: String!
+    time: String!
   }
 
   type Query {
-    equipments: [Equipment!]! @requireAuth
+    equipments: [Equipment!]! @skipAuth
     equipment(id: Int!): Equipment @requireAuth
   }
 
@@ -15,12 +17,16 @@ export const schema = gql`
     heading: String!
     price: Int!
     image_url: String!
+    location: String!
+    time: String!
   }
 
   input UpdateEquipmentInput {
     heading: String
     price: Int
     image_url: String
+    location: String
+    time: String
   }
 
   type Mutation {
