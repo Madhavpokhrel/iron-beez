@@ -49,3 +49,12 @@ model RecentlyAddedEquipment {
   location  String
   time      String
 }
+
+model FeaturedItemsEquipment {
+  id        Int    @id @default(autoincrement())
+  heading   String
+  price     Int
+  image_url String
+  location  String
+  time      String
+}

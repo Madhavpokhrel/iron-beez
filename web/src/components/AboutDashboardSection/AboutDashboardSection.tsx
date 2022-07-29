@@ -1,7 +1,10 @@
 import { Box, Button, Center, Flex, Text } from '@chakra-ui/react'
 import { BiSearch } from 'react-icons/bi'
 
+import { Link, routes } from '@redwoodjs/router'
+
 // import About1 from 'src/Image/about-img.png'
+
 const AboutDashboardSection = () => {
   return (
     <Center
@@ -92,7 +95,7 @@ const AboutDashboardSection = () => {
             width="17%"
             color="white"
           >
-            Search
+            <Link to={routes.productsDetail()}>Search</Link>
           </Button>
         </Box>
       </Flex>

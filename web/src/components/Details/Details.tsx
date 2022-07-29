@@ -5,23 +5,23 @@ import product from 'src/Image/product2.png'
 const Details = () => {
   return (
     <div>
-      <Flex width={'100%'} p={10} paddingLeft={'9%'}>
+      <Flex width={'100%'} p={10} paddingLeft={'7%'} mt={6}>
         <HStack spacing={'0px'} boxShadow={' rgba(0, 0, 0, 0.35) 0px 5px 15px'}>
-          <Box width={'455px'} height={'300px'} bg={'white'}>
+          <Box width={'585px'} height={'350px'} bg={'white'}>
             <Image
               src={product}
               alt="Products not shown"
-              width={'455px'}
-              height={'300px'}
+              width={'585px'}
+              height={'350px'}
             />
           </Box>
           <Box
-            width={'455px'}
-            height={'300px'}
+            width={'585px'}
+            height={'350px'}
             bg={'#EFEFEF'}
             borderRadius={'0px 6px 6px 0px'}
           >
-            <Box pl={4} pr={5}>
+            <Box pl={8} pr={10}>
               <Box mt={4} pb={3}>
                 <HStack justifyContent={'space-between'}>
                   <Text textColor={'#064789'} fontWeight={'700'}>
@@ -50,7 +50,7 @@ const Details = () => {
                   CAT
                 </Text>
               </HStack>
-              <Divider borderColor=" #C0C0C0" mt={1} mb={2} />
+              <Divider borderColor=" #C0C0C0" mt={3} mb={3} />
               <HStack justifyContent={'space-between'}>
                 <Text
                   fontWeight={'400'}
@@ -64,7 +64,7 @@ const Details = () => {
                   2020
                 </Text>
               </HStack>
-              <Divider borderColor=" #C0C0C0" mt={1} mb={2} />
+              <Divider borderColor=" #C0C0C0" mt={3} mb={3} />
               <HStack justifyContent={'space-between'}>
                 <Text
                   fontWeight={'400'}
@@ -78,7 +78,7 @@ const Details = () => {
                   200hrs
                 </Text>
               </HStack>
-              <Divider borderColor=" #C0C0C0" mt={1} mb={2} />
+              <Divider borderColor=" #C0C0C0" mt={3} mb={3} />
               <HStack justifyContent={'space-between'}>
                 <Text
                   fontWeight={'400'}
@@ -92,7 +92,7 @@ const Details = () => {
                   Semi truck
                 </Text>
               </HStack>
-              <Divider borderColor=" #C0C0C0" mt={1} mb={2} />
+              <Divider borderColor=" #C0C0C0" mt={3} mb={3} />
               <HStack justifyContent={'space-between'}>
                 <Text
                   fontWeight={'400'}
@@ -106,7 +106,7 @@ const Details = () => {
                   2
                 </Text>
               </HStack>
-              <Divider borderColor=" #C0C0C0" mt={1} mb={2} />
+              <Divider borderColor=" #C0C0C0" mt={3} mb={3} />
             </Box>
           </Box>
         </HStack>

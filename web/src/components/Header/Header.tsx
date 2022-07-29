@@ -13,10 +13,12 @@ const Header = () => {
         alignItems={'center'}
         justifyContent={'space-between'}
       >
-        <Box paddingLeft={'2rem'}>
-          <Image src={logo} width="170px" height={'30px'} />
+        <Box paddingLeft={'3rem'}>
+          <Link to={routes.home()}>
+            <Image src={logo} width="170px" height={'30px'} />
+          </Link>
         </Box>
-        <HStack marginRight={'2rem'}>
+        <HStack marginRight={'3rem'}>
           <Button
             color={'black'}
             _hover={{ bg: 'none' }}
@@ -33,6 +35,7 @@ const Header = () => {
             bg="#D68C45"
             color="white"
             size="sm"
+            width={'170px'}
           >
             Signup
           </Button>
