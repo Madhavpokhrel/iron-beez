@@ -1,5 +1,5 @@
 import { GraphQLResolveInfo, GraphQLScalarType, GraphQLScalarTypeConfig } from 'graphql';
-import { User as PrismaUser, Equipment as PrismaEquipment, Article as PrismaArticle, RecentlyAddedEquipment as PrismaRecentlyAddedEquipment, Prisma } from '.prisma/client';
+import { User as PrismaUser, Equipment as PrismaEquipment, Article as PrismaArticle, RecentlyAddedEquipment as PrismaRecentlyAddedEquipment, FeaturedItemsEquipment as PrismaFeaturedItemsEquipment, Prisma } from '.prisma/client';
 import { RedwoodGraphQLContext } from '@redwoodjs/graphql-server/dist/functions/types';
 export type Maybe<T> = T | null;
 export type InputMaybe<T> = Maybe<T>;
@@ -314,7 +314,7 @@ export type ResolversTypes = {
   Date: ResolverTypeWrapper<Scalars['Date']>;
   DateTime: ResolverTypeWrapper<Scalars['DateTime']>;
   Equipment: ResolverTypeWrapper<PrismaEquipment>;
-  FeaturedItemsEquipment: ResolverTypeWrapper<FeaturedItemsEquipment>;
+  FeaturedItemsEquipment: ResolverTypeWrapper<PrismaFeaturedItemsEquipment>;
   Int: ResolverTypeWrapper<Scalars['Int']>;
   JSON: ResolverTypeWrapper<Prisma>;
   JSONObject: ResolverTypeWrapper<Scalars['JSONObject']>;
@@ -342,7 +342,7 @@ export type ResolversParentTypes = {
   Date: Scalars['Date'];
   DateTime: Scalars['DateTime'];
   Equipment: PrismaEquipment;
-  FeaturedItemsEquipment: FeaturedItemsEquipment;
+  FeaturedItemsEquipment: PrismaFeaturedItemsEquipment;
   Int: Scalars['Int'];
   JSON: Prisma;
   JSONObject: Scalars['JSONObject'];

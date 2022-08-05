@@ -5,8 +5,9 @@ import { Equipment } from 'types/graphql'
 const EquipementCard = ({ equipment }: { equipment: Equipment }) => {
   return (
     <>
-      <Box boxShadow="md" p="10px" m="10px" borderRadius="7px" bgColor="white">
-        <Image width="100%" height="65%" src={equipment.image_url} />
+      <Box boxShadow="md" p="10px" m="5px" borderRadius="7px" bgColor="white">
+        <Image height="180px" width="300px" src={equipment.image_url} />
+
         <Tooltip
           label="2021 Felco 211-50 qqqqq www  eee e rrrrr rr"
           aria-label="A tooltip"

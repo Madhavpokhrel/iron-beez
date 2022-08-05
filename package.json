@@ -26,7 +26,10 @@
     "@chakra-ui/react": "^2.2.4",
     "@emotion/react": "^11.9.3",
     "@emotion/styled": "^11.9.3",
+    "antd": "^4.22.2",
     "framer-motion": "^6.5.1",
+    "google-map-react": "^2.2.0",
+    "google-maps-react": "^2.0.6",
     "react-icons": "^4.4.0",
     "react-router-dom": "^6.3.0"
   }

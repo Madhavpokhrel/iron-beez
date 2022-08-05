@@ -97,7 +97,7 @@ export const Success = ({ equipments }: CellSuccessProps<FindEquipments>) => {
             paddingLeft="10px"
           >
             {equipments.map((item) => {
-              return <EquipementCard equipment={item} key="item" />
+              return <EquipementCard equipment={item} key="recommendedItems" />
             })}
           </Flex>
           <Box

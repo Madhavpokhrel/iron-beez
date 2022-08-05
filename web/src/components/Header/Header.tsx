@@ -1,4 +1,4 @@
-import { Box, Button, Flex, HStack, Image } from '@chakra-ui/react'
+import { Box, Button, Flex, HStack, Image, Center } from '@chakra-ui/react'
 
 import { Link, routes } from '@redwoodjs/router'
 
@@ -6,42 +6,49 @@ import logo from 'src/Image/Iron-logo.png'
 
 const Header = () => {
   return (
-    <Box height={'10vh'}>
-      <Flex
-        height={'100%'}
-        boxShadow="base"
-        alignItems={'center'}
-        justifyContent={'space-between'}
-      >
-        <Box paddingLeft={'3rem'}>
+    <Center
+      height={{ base: '8vh', sm: '10vh', md: '12vh', lg: '14vh' }}
+      boxShadow="lg"
+    >
+      <Flex width="95%" justifyContent="space-between">
+        <Box paddingLeft={{ base: '1rem', lg: '2rem' }}>
           <Link to={routes.home()}>
-            <Image src={logo} width="170px" height={'30px'} />
+            <Image
+              src={logo}
+              width={{ base: '110px', sm: '190px', md: '200px', lg: '220px' }}
+              height={{ base: '30px', sm: '33px', md: '37px', lg: '40px' }}
+            />
           </Link>
         </Box>
-        <HStack marginRight={'3rem'}>
+        <HStack
+          marginRight={{ base: '0rem', sm: '1.5rem', md: '3rem', lg: '3rem' }}
+        >
           <Button
             color={'black'}
             _hover={{ bg: 'none' }}
             padding={'0'}
             margin={'0'}
-            marginRight="1rem"
+            marginRight={{ base: '0.3rem', lg: '1rem' }}
             bg={'none'}
-            size="sm"
+            fontSize={{ base: '14px', sm: '16px', md: '17px', lg: '18px' }}
           >
             <Link to={routes.login()}>Login</Link>
           </Button>
           <Button
+            fontSize={{ base: '12px', sm: '14px', md: '16px', lg: '18px' }}
+            width={{ base: '20%', sm: '50%', md: '60%', lg: '70%' }}
+            height={{ base: '70%', sm: '80%', md: '85%', lg: '100%' }}
             _hover={{ bg: '#D68C45' }}
             bg="#D68C45"
             color="white"
-            size="sm"
-            width={'170px'}
+            pl="3rem"
+            pr="3rem"
           >
             Signup
           </Button>
         </HStack>
       </Flex>
-    </Box>
+    </Center>
   )
 }
 

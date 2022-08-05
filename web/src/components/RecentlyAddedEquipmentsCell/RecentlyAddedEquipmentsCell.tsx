@@ -1,6 +1,6 @@
 import { useRef } from 'react'
 
-import { Flex, Text, Box } from '@chakra-ui/react'
+import { Flex, Text, Box, Center } from '@chakra-ui/react'
 import {
   IoIosArrowDropleftCircle,
   IoIosArrowDroprightCircle,
@@ -55,14 +55,13 @@ export const Success = ({
   const contentWrapper = useRef(null)
   return (
     <Box height="100vh">
-      <Box
-        pb="2rem"
-        height="95%"
+      <Center
+        height="100%"
         bgImage="url('/RecentlyBg.png')"
-        display="flex"
         flexDir="column"
-        alignItems="center"
-        justifyContent="center"
+        bgRepeat="no-repeat"
+        bgPos="center"
+        bgSize="cover"
       >
         <Box width="79%">
           <Text
@@ -101,7 +100,7 @@ export const Success = ({
             paddingLeft="10px"
           >
             {equipments.map((item) => {
-              return <EquipementCard equipment={item} key="item" />
+              return <EquipementCard equipment={item} key="recentItems" />
             })}
           </Flex>
           <Box
@@ -120,7 +119,7 @@ export const Success = ({
             />
           </Box>
         </Flex>
-      </Box>
+      </Center>
     </Box>
   )
 }

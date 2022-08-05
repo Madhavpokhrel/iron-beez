@@ -1,9 +1,17 @@
-import { Box, Button, Center, Flex, Text } from '@chakra-ui/react'
+import {
+  Box,
+  Button,
+  Center,
+  Flex,
+  Text,
+  Input,
+  InputGroup,
+  InputLeftElement,
+  Divider,
+} from '@chakra-ui/react'
 import { BiSearch } from 'react-icons/bi'
 
 import { Link, routes } from '@redwoodjs/router'
-
-// import About1 from 'src/Image/about-img.png'
 
 const AboutDashboardSection = () => {
   return (
@@ -14,11 +22,12 @@ const AboutDashboardSection = () => {
       bgPos="center"
       bgSize="cover"
       bgImage="url('about-img.png')"
+      bgRepeat="no-repeat"
     >
       <Box
         position="absolute"
         top="20%"
-        left={{ sm: '20%', md: '4%' }}
+        left={{ sm: '20%', md: '5%' }}
         bgColor="rgb(19, 28, 39, 0.6);"
         color="white"
         borderRadius="7px"
@@ -34,70 +43,65 @@ const AboutDashboardSection = () => {
           transaction experience for today’s <br /> digital world
         </Text>
       </Box>
-
       <Flex
         top="76%"
-        left="15%"
+        left="10%"
         position="absolute"
         width="80%"
-        boxShadow="base"
-        paddingLeft="0.5rem"
+        bgColor="white"
+        borderRadius="7px"
       >
-        <Box
-          bgColor="white"
-          paddingTop="1.1rem"
-          paddingLeft="1rem"
-          paddingRight="1rem"
-          paddingBottom="0.9rem"
-          pos="absolute"
-          top="0"
-          left="-12"
-          borderBottomLeftRadius="7px"
-          borderTopLeftRadius="7px"
-          cursor="pointer"
-          _hover={{ bg: 'lightgray' }}
-        >
-          {' '}
-          <BiSearch color="#D68C45" size="1.5rem" fontWeight="bold" />
-        </Box>
-        <input
-          style={{
-            padding: '0.5rem',
-            paddingLeft: '4rem',
-            width: '38%',
-            border: 'none',
-          }}
-          placeholder="Search"
-        ></input>
-
-        {/* <Divider orientation="vertical" height="70%" /> */}
-        <input
-          style={{
-            padding: '1rem',
-            width: '36%',
-            border: 'none',
-          }}
-          placeholder="Zip code"
-        ></input>
-        <Box
-          bgColor="white"
-          width="22%"
-          borderTopRightRadius="7px"
-          borderBottomRightRadius="7px"
-        >
-          <Button
-            position="absolute"
-            right="6%"
-            top="15%"
-            size="md"
-            bg="#4C956C"
-            _hover={{ bg: '#D68C45' }}
-            width="17%"
-            color="white"
+        <InputGroup>
+          <InputLeftElement
+            cursor="pointer"
+            color="#D68C45"
+            height="100%"
+            pl="10px"
           >
-            <Link to={routes.productsDetail()}>Search</Link>
-          </Button>
-        </Box>
+            <Link to={routes.productsListing()}>
+              <BiSearch size="1.7rem" />
+            </Link>
+          </InputLeftElement>
+          <Input
+            padding="1.7rem"
+            pl="3rem"
+            width="50%"
+            border="none"
+            placeholder="Search"
+            borderRightRadius="none"
+            fontSize="18px"
+          ></Input>
+          <Center>
+            <Divider
+              orientation="vertical"
+              height="65%"
+              bgColor="#5A5A5A"
+              width="1.5px"
+            />
+          </Center>
+          <Input
+            padding="1.7rem"
+            width="50%"
+            border="none"
+            placeholder="Zip code"
+            borderLeftRadius="none"
+            borderRightRadius="none"
+            fontSize="18px"
+          ></Input>
+        </InputGroup>
+
+        <Button
+          width="25%"
+          size="md"
+          bg="#4C956C"
+          _hover={{ bg: '#D68C45' }}
+          color="white"
+          ml="1rem"
+          mr="1rem"
+          mt="0.4rem"
+        >
+          <Link to={routes.productsDetail()}>Search</Link>
+        </Button>
       </Flex>
     </Center>
   )

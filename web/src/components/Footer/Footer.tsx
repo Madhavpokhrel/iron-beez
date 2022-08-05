@@ -21,7 +21,7 @@ const Footer = () => {
     <div>
       <Box bg="#064789" w="100%" height={'12'}>
         <Flex alignItems={'center'}>
-          <Text ml={4} color="white" font-weight="bold" mt={'4px'}>
+          <Text ml={4} color="white" fontWeight="bold" mt={'4px'}>
             Subscribe Our Newslater
           </Text>
 
