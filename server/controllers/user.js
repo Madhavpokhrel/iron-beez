@@ -1,60 +1,60 @@
-import User from "../models/user.js";
-import bcrypt from "bcryptjs";
-import jwt from "jsonwebtoken";
-import {sendEmail} from "../utils/sendEmail.js";
+import User from '../models/user.js';
+import bcrypt from 'bcryptjs';
+import jwt from 'jsonwebtoken';
+import { sendEmail } from '../utils/sendEmail.js';
 
 export const signup = async (req, res) => {
-  const { firstName, lastName, phoneNumber, email, password, zipCode } = req.body;
+  const { firstName, lastName, phoneNumber, email, password, zipCode } =
+    req.body;
 
-  try {
-    const oldUser = await User.findOne({ email });
+  const oldUser = await User.findOne({ email });
 
-    if (oldUser) return res.status(400).json({ message: "User already exists" });
+  if (oldUser) return res.status(400).json({ message: 'User already exists' });
 
-    const hashedPassword = await bcrypt.hash(password, 12);
+  const activeCode = Math.random().toString(36).substring(0, 20);
 
-    const activeCode = Math.random().toString(36).substring(0, 20);
-    
-    const result = await User.create({firstName, lastName, phoneNumber, email, password: hashedPassword, zipCode, activeCode });
+  const result = await User.create({
+    firstName,
+    lastName,
+    phoneNumber,
+    email,
+    password,
+    zipCode
+  });
 
-    await sendEmail(
-      email,
-      "Ironbeez",
-      `Dear ${firstName},
-    <br>
-    <p style="font-size: 16px; text-align: justify;">To activate your account. Please <a href="http://localhost:3000/activate?email=${result.email}&activeCode=${activeCode}" target="_blank"> CLICK HERE</a>.</p>
-    
-    <p>Thank you,</p>
-    <p><strong> IronBeez</strong>
-    <br>`
-    );
+  // await sendEmail(
+  //   email,
+  //   "Ironbeez",
+  //   `Dear ${firstName},
+  // <br>
+  // <p style="font-size: 16px; text-align: justify;">To activate your account. Please <a href="http://localhost:3000/activate?email=${result.email}&activeCode=${activeCode}" target="_blank"> CLICK HERE</a>.</p>
 
-    res.status(201).json( result );
-  } catch (error) {
-    res.status(500).json({ message: "Something went wrong" });
-    
-    console.log(error);
-  }
+  // <p>Thank you,</p>
+  // <p><strong> IronBeez</strong>
+  // <br>`
+  // );
+
+  res.status(201).json(result);
 };
 
 export const signin = async (req, res) => {
   User.findOne({ email: req.body.email })
     .exec()
-    .then((user) => {
+    .then(user => {
       if (!user) {
         return res.status(401).json({
-          message: "Email or password is incorrect",
+          message: 'Email or password is incorrect',
         });
       }
       bcrypt.compare(req.body.password, user.password, (err, result) => {
         if (err) {
           return res.status(401).json({
-            message: "Email or password is incorrect",
+            message: 'Email or password is incorrect',
           });
         }
-        if(result.accountActive == false) {
+        if (result.accountActive == false) {
           return res.status(401).json({
-            message: "Please activate your account!",
+            message: 'Please activate your account!',
           });
         }
         if (result) {
@@ -63,9 +63,9 @@ export const signin = async (req, res) => {
               email: user.email,
               userId: user._id,
             },
-            process.env.JWT_KEY || "text",
+            process.env.JWT_KEY || 'text',
             {
-              expiresIn: "1h",
+              expiresIn: '1h',
             }
           );
           const test = user;
@@ -75,29 +75,30 @@ export const signin = async (req, res) => {
           });
         }
         res.status(401).json({
-          message: "Email or password is incorrect",
+          message: 'Email or password is incorrect',
         });
       });
     })
-    .catch((err) => {
+    .catch(err => {
       console.log(err);
       res.status(500).json({
         error: err,
       });
     });
-}
+};
 
 export const activateAccount = async (req, res) => {
-    const activeCode = req.query.activeCode;
-    const email = req.query.email;
+  const activeCode = req.query.activeCode;
+  const email = req.query.email;
 
-    const isEmail = await User.findOne({email});
+  const isEmail = await User.findOne({ email });
 
-    if(!isEmail) return res.status(400).json({ message: "Account not activated!" });
+  if (!isEmail)
+    return res.status(400).json({ message: 'Account not activated!' });
 
-    const isAccountActive = await isEmail.accountActive.localeCompare(activeCode);
+  const isAccountActive = await isEmail.accountActive.localeCompare(activeCode);
 
-    if(isAccountActive !== 0) return res.redirect("/account-not-active");
+  if (isAccountActive !== 0) return res.redirect('/account-not-active');
 
-    res.redirect("/accountActive");
-}
+  res.redirect('/accountActive');
+};

@@ -24,14 +24,6 @@ const userSchema = mongoose.Schema({
         type: String,
         required: true
     },
-    accountActive: {
-        type: Boolean,
-        default: false
-    },
-    activeCode: {
-        type: String,
-        required: true
-    },
     token: String,
     createdAt: {
         type: Date,
