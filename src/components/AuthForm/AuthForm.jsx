@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import {
   HStack,
   VStack,
@@ -8,20 +8,11 @@ import {
   FormLabel,
   Input,
   FormErrorMessage,
-  Toast,
 } from '@chakra-ui/react';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import axios from 'axios';
 
-// import { navigate, routes } from "@redwoodjs/router";
-// import { MetaTags } from "@redwoodjs/web";
-// import { Toaster } from "@redwoodjs/web/toast";
-// import { toast } from "@redwoodjs/web/toast";
-
-// type LoginFormProps = {
-//   backtosignin: () => void;
-// };
 const initialState = {
   firstName: '',
   lastName: '',
@@ -34,36 +25,24 @@ const initialState = {
 const AuthForm = () => {
   const [signupForm, setSignupForm] = useState(initialState);
   const [isSignup, setIsSignup] = useState(true);
+  const firstRef = useRef(null);
+  const lastRef = useRef(null);
 
   const handleChange = e => {
     setSignupForm({ ...signupForm, [e.target.name]: e.target.value });
   };
+
   const SuccesfullyRegister = () => {
     toast.success('Register Succesfully!', { position: 'top-center' });
   };
+
   const FailedRegister = () => {
-    toast.error('Register Unsuccesfully!', { position: 'top-center' });
-  };
-
-  const clear = () => {
-    setSignupForm({
-      firstName: '',
-      lastName: '',
-      phoneNumber: '',
-      email: '',
-      zipCode: '',
-      password: '',
-    });
-  };
-
-  const registerSuccess = () => {
-    toast.success('Registered Successfully!', {
-      position: toast.POSITION.TOP_RIGHT,
-    });
+    toast.error(' Register Unsuccesfully', { position: 'top-center' });
   };
 
   const handleSubmit = async e => {
     e.preventDefault();
+    e.target.reset();
 
     if (isSignup) {
       console.log('signupData =>', signupForm);
@@ -71,6 +50,7 @@ const AuthForm = () => {
       try {
         const result = await axios.post(
           'http://localhost:5000/api/sign-up',
+
           JSON.stringify({
             firstName: signupForm.firstName,
             lastName: signupForm.lastName,
@@ -85,57 +65,23 @@ const AuthForm = () => {
           }
         );
 
-        if (result.status == 201) {
-          SuccesfullyRegister();
+        if (result.response.status == 201) {
+          toast.success('Register Successfully!', { position: 'top-center' });
         }
       } catch (e) {
         console.log('error => ', e);
-        if (e.status == 400) {
-          FailedRegister();
-        }
+
+        FailedRegister();
       }
     } else {
       console.log('signin data');
     }
   };
 
-  // const { isAuthenticated, signUp } = useAuth();
-
-  // useEffect(() => {
-  //   if (isAuthenticated) {
-  //     navigate(routes.home());
-  //   }
-  // }, [isAuthenticated]);
-
-  // // focus on email box on page load
-  // const usernameRef = useRef<HTMLInputElement>();
-  // useEffect(() => {
-  //   usernameRef.current.focus();
-  // }, []);
-
-  // const onSubmit = async (data) => {
-  //   const response = await signUp({ ...data });
-
-  //   if (response.message) {
-  //     toast(response.message);
-  //   } else if (response.error) {
-  //     toast.error(response.error);
-  //   } else {
-  //     // user is signed in automatically
-  //     toast.success("Welcome!");
-  //   }
-  // };
   return (
     <>
       <Flex ml={5} mr={5}>
         <main className="rw-main">
-          {/* <Toaster toastOptions={{ className: "rw-toast", duration: 6000 }} /> */}
-          {/* <div className="rw-scaffold rw-login-container">
-          <div className="rw-segment"> */}
-          {/* <header className="rw-segment-header">
-              <h2 className="rw-heading rw-heading-secondary">Signup</h2>
-            </header> */}
-
           <div className="rw-segment-main" style={{ background: '#FFFFFF' }}>
             <div className="rw-form-wrapper">
               <form onSubmit={handleSubmit}>
@@ -146,16 +92,10 @@ const AuthForm = () => {
                       style={{ width: '411px' }}
                       name="firstName"
                       className="rw-input"
+                      ref={firstRef}
                       placeholder="Enter Your FirstName"
                       onChange={handleChange}
-                      // errorClassName="rw-input rw-input-error"
-                      // ref={usernameRef}
-                      // validation={{
-                      //   required: {
-                      //     value: true,
-                      //     message: "Please Enter the FirstName",
-                      //   },
-                      // }}
+                      required
                     />
                     <FormErrorMessage />
 
@@ -163,16 +103,10 @@ const AuthForm = () => {
                     <Input
                       name="phoneNumber"
                       className="rw-input"
-                      // errorClassName="rw-input rw-input-error"
+                      ref={lastRef}
                       placeholder="Enter Your PhoneNumber"
                       onChange={handleChange}
-                      // ref={usernameRef}
-                      // validation={{
-                      //   required: {
-                      //     value: true,
-                      //     message: "Please Enter the phoneNumber",
-                      //   },
-                      // }}
+                      required
                     />
                     <FormErrorMessage />
                     <FormLabel>Password</FormLabel>
@@ -182,12 +116,7 @@ const AuthForm = () => {
                       placeholder="Enter Your Password"
                       onChange={handleChange}
                       autoComplete="current-password"
-                      // validation={{
-                      //   required: {
-                      //     value: true,
-                      //     message: "Password is required",
-                      //   },
-                      // }}
+                      required
                     />
                     <FormErrorMessage />
                   </VStack>
@@ -197,9 +126,9 @@ const AuthForm = () => {
                       style={{ width: '411px' }}
                       name="lastName"
                       className="rw-input"
-                      // errorClassName="rw-input rw-input-error"
                       placeholder="Enter Your LastName"
                       onChange={handleChange}
+                      required
                     />
                     <FormErrorMessage />
                     <FormLabel>Email</FormLabel>
@@ -209,6 +138,7 @@ const AuthForm = () => {
                       className="rw-input"
                       placeholder="Enter Your Email"
                       onChange={handleChange}
+                      required
                     />
                     <FormErrorMessage />
                     <FormLabel>Confirm Password</FormLabel>
@@ -216,6 +146,7 @@ const AuthForm = () => {
                       name="confirmPassword"
                       placeholder="Confirm Your Password"
                       autoComplete="current-password"
+                      required
                     />
                     <FormErrorMessage />
                   </VStack>
@@ -229,14 +160,7 @@ const AuthForm = () => {
                       className="rw-input"
                       placeholder="Enter Your ZipCode"
                       onChange={handleChange}
-                      // errorClassName="rw-input rw-input-error"
-                      // ref={usernameRef}
-                      // validation={{
-                      //   required: {
-                      //     value: true,
-                      //     message: "Please Enter the Valid ZipCode",
-                      //   },
-                      // }}
+                      required
                     />
                     <FormErrorMessage />
                   </VStack>
@@ -245,11 +169,11 @@ const AuthForm = () => {
                   <Button
                     bg={'#4C956C'}
                     color={'white'}
-                    onClick={SuccesfullyRegister}
+                    // onClick={{ SuccesfullyRegister, FailedRegister }}
                     mt={5}
                     width="60%"
                     type="submit"
-                    // onClick={() => setIsSignup(true)}
+                    onClick={() => setIsSignup(true)}
                   >
                     <Text fontWeight={'bold'}>Sign Up</Text>
                   </Button>
@@ -261,8 +185,6 @@ const AuthForm = () => {
                     <HStack>
                       <span>Already have an account?</span>
                       <Text
-                        // to={routes.login()}
-                        // onClick={backtosignin}
                         cursor="pointer"
                         className="rw-link"
                         style={{ color: '#D68C45', fontWeight: 'bold' }}
@@ -275,9 +197,6 @@ const AuthForm = () => {
               </form>
             </div>
           </div>
-          {/* </div> */}
-
-          {/* </div> */}
         </main>
       </Flex>
       <ToastContainer />

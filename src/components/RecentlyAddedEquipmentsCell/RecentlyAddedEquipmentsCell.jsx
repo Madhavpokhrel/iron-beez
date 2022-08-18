@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import { useRef } from 'react';
 import { Flex, Text, Box, Center } from '@chakra-ui/react';
 import {
@@ -7,6 +7,7 @@ import {
 } from 'react-icons/io';
 import EquipementCard from '../EquipmentCard/EquipementCard';
 import axios from 'axios';
+import RecentlyBg from '../../assets/Image/RecentlyBg.jpg';
 
 const sideScroll = (element, speed, distance, step) => {
   let scrollAmount = 0;
@@ -47,7 +48,7 @@ export const RecentlyAddedEquipmentsCell = () => {
     <Box height="100vh">
       <Center
         height="100%"
-        bgImage="url('/RecentlyBg.png')"
+        bgImage={RecentlyBg}
         flexDir="column"
         bgRepeat="no-repeat"
         bgPos="center"
@@ -65,7 +66,6 @@ export const RecentlyAddedEquipmentsCell = () => {
             Recently Added
           </Text>
         </Box>
-
         <Flex>
           <Box
             display="flex"

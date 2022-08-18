@@ -12,10 +12,10 @@ import { ProductsListCell } from '../../components/ProductsListCell/ProductsList
 import Header from '../../components/Header/Header';
 import Footer from '../../components/Footer/Footer';
 
-const ProductsListingPage = () => {
+const ProductsListingPage = ({ zipCodeValue, searchValue }) => {
   return (
     <>
-    <Header />
+      <Header />
       <Center width="100%" height="12vh">
         <Flex width="90%" justifyContent="space-between">
           <Center>
@@ -43,7 +43,7 @@ const ProductsListingPage = () => {
           </Center>
         </Flex>
       </Center>
-      <ProductsListCell />
+      <ProductsListCell zipCodeValue={zipCodeValue} searchValue={searchValue} />
       <Footer />
     </>
   );

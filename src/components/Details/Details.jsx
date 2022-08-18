@@ -1,3 +1,4 @@
+import React from 'react';
 import {
   HStack,
   Image,
@@ -6,9 +7,9 @@ import {
   Divider,
   Text,
   Stack,
-} from '@chakra-ui/react'
+} from '@chakra-ui/react';
 
-import product from '../../assets/Image/product2.png'
+import product from '../../assets/Image/product2.png';
 
 const Details = () => {
   return (
@@ -128,7 +129,7 @@ const Details = () => {
         <Divider borderColor=" #C0C0C0" mt={[1, 1, 2, 3]} mb={[1, 1, 2, 3]} />
       </Flex>
     </Flex>
-  )
-}
+  );
+};
 
-export default Details
+export default Details;

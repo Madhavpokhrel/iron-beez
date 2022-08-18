@@ -25,7 +25,7 @@ export default function MapContainer() {
       }}
     >
       <GoogleMapReact
-        bootstrapURLKeys={{ key: 'AIzaSyAGzyLx6YoUcqfV9_tqLJG5KmCid0RW4vw' }}
+        bootstrapURLKeys={{ key: 'AIzaSyCC-T0E4tWBCEmrsjp1Kc5o87NmYtUHCE0' }}
         defaultCenter={defaultProps.center}
         defaultZoom={defaultProps.zoom}
       >

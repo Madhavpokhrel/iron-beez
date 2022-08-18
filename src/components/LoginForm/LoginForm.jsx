@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useRef } from 'react';
 import {
   Text,
   Box,
@@ -9,58 +9,71 @@ import {
   FormErrorMessage,
   Flex,
 } from '@chakra-ui/react';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import axios from 'axios';
 
-// import { Link, Navigate, Routes } from "react-router-dom";
-// import { toast } from "react-toastify";
-
-// type LoginFormProps = {
-//   onContinueWithEmail: () => void;
-// };
+const initialState = {
+  email: '',
+  password: '',
+};
 
 const LoginForm = () => {
-  // const { isAuthenticated, logIn } = useAuth();
+  const [signinForm, setSigninForm] = useState(initialState);
+  const [isSignin, setIsSignin] = useState(true);
 
-  //   useEffect(() => {
-  //     if (isAuthenticated) {
-  //       // Navigate(Routes.Home());
-  //     }
-  //   }, [isAuthenticated]);
+  const handleChange = e => {
+    setSigninForm({ ...signinForm, [e.target.name]: e.target.value });
+  };
 
-  // const usernameRef = useRef<HTMLInputElement>();
-  // useEffect(() => {
-  //   usernameRef.current.focus();
-  // }, []);
+  const SuccesfullyRegister = () => {
+    toast.success('Register Succesfully!', { position: 'top-center' });
+  };
+  const FailedRegister = () => {
+    toast.error(' Register Unsuccesfully', { position: 'top-center' });
+  };
 
-  // const onSubmit = async (data) => {
-  //   const response = await logIn({ ...data });
+  const handleSubmit = async e => {
+    e.preventDefault();
+    e.target.reset();
 
-  //   if (response.message) {
-  //     toast(response.message);
-  //   } else if (response.error) {
-  //     toast.error(response.error);
-  //   } else {
-  //     toast.success("Welcome back!");
-  //   }
+    try {
+      const result = await axios.post(
+        'http://localhost:5000/api/sign-in',
+
+        JSON.stringify({
+          email: signinForm.email,
+          password: signinForm.password,
+        }),
+        {
+          headers: { 'Content-Type': 'application/json' },
+          withCredentials: true,
+        }
+      );
+
+      if (result.response.status == 201) {
+        SuccesfullyRegister();
+      }
+    } catch (e) {
+      console.log('error => ', e);
+
+      FailedRegister();
+    }
+  };
 
   return (
     <Flex height={'60vh'} m={(6, 6, 6, 6)}>
       <div>
         <div>
           <div>
-            <form>
+            <form onSubmit={handleSubmit}>
               <FormLabel>Email</FormLabel>
               <Input
                 style={{ width: '500px' }}
                 name="username"
                 className="rw-input"
                 placeholder="Enter Your Email"
-                // ref={usernameRef}
-                // validation={{
-                //   required: {
-                //     value: true,
-                //     message: "invalid email address",
-                //   },
-                // }}
+                onChange={handleChange}
               />
 
               <FormErrorMessage className="rw-field-error" />
@@ -72,12 +85,7 @@ const LoginForm = () => {
                 className="rw-input"
                 placeholder="Enter your Password"
                 autoComplete="current-password"
-                // validation={{
-                //   required: {
-                //     value: true,
-                //     message: "Enter a valid password to sign in",
-                //   },
-                // }}
+                onChange={handleChange}
               />
 
               <FormErrorMessage />
@@ -85,7 +93,14 @@ const LoginForm = () => {
                 <Link>Forgot Your Password?</Link>
               </Box>
 
-              <Button bg={'#4C956C'} color={'white'} mt={5} width="100%">
+              <Button
+                bg={'#4C956C'}
+                color={'white'}
+                mt={5}
+                width="100%"
+                type="submit"
+                // onClick={() => setIsSignin(true)}
+              >
                 <Text fontWeight={'bold'}>Sign in</Text>
               </Button>
             </form>

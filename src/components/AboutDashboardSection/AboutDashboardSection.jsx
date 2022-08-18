@@ -17,11 +17,15 @@ import AboutImage from '../../assets/images/about-img.png';
 import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router';
 
-const AboutDashboardSection = () => {
+const AboutDashboardSection = ({
+  searchValue,
+  setSearchValue,
+  zipCodeValue,
+  setZipCodeValue,
+}) => {
   const [error, setError] = useState('');
   let navigate = useNavigate();
-  const [searchValue, setSearchValue] = useState('');
-  const [zipCodeValue, setZipCodeValue] = useState('');
+
   const handleSearchChange = e => setSearchValue(e.target.value);
   const handleZipCodeChange = e => setZipCodeValue(e.target.value);
   const handleProductListing = () => {

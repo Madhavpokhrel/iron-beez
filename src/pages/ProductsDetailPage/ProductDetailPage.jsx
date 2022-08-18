@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Flex, Box } from '@chakra-ui/react';
 // import FeaturedItemsCell from 'src/components/FeaturedItemsCell'
 // import Footer from 'src/components/Footer/Footer'
@@ -9,8 +9,25 @@ import Details from '../../components/Details/Details';
 import EquipmentImages from '../../components/EquipmentImages/EquipmentImages';
 import Header from '../../components/Header/Header';
 import Footer from '../../components/Footer/Footer';
+import axios from 'axios';
 
 const ProductsDetailPage = () => {
+  const [productsDetail, setProductsDetail] = useState([]);
+  useEffect(() => {
+    const fetchProductsDetailApi = async id => {
+      const result = await axios.get(
+        `http://marketcheck-prod.apigee.net/v2/search/heavy-equipment/active?api_key=OMOV4Xoz9GXONrwlv6dvtvRuJeps33T3&search_text=turbo&zip=74116${id}`,
+        {
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        }
+      );
+      setProductsDetail(result.data.listings);
+    };
+    fetchProductsDetailApi();
+  }, []);
+
   return (
     <>
       <Header />
@@ -19,7 +36,9 @@ const ProductsDetailPage = () => {
         mt={{ base: '5', sm: '9', md: '10', lg: '10' }}
         mb={7}
       >
-        <Details />
+        {productsDetail.map(item => {
+          return <Details item={item.id} />;
+        })}
       </Flex>
 
       <Flex>
@@ -41,7 +60,7 @@ const ProductsDetailPage = () => {
       <Flex justifyContent="center" mt={'5rem'} mb={'4rem'}>
         <Enquiry />
       </Flex>
-      {/* <Footer />     */}
+      <Footer />
     </>
   );
 };

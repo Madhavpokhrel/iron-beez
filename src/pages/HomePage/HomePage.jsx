@@ -6,11 +6,21 @@ import { RecommendationsCell } from '../../components/RecommendationsCell/Recomm
 import { RecentlyAddedEquipmentsCell } from '../../components/RecentlyAddedEquipmentsCell/RecentlyAddedEquipmentsCell';
 // import About from '../../components/About/About';
 
-const HomePage = () => {
+const HomePage = ({
+  zipCodeValue,
+  setZipCodeValue,
+  searchValue,
+  setSearchValue,
+}) => {
   return (
     <>
       <Header />
-      <AboutDashboardSection />
+      <AboutDashboardSection
+        zipCodeValue={zipCodeValue}
+        setZipCodeValue={setZipCodeValue}
+        searchValue={searchValue}
+        setSearchValue={setSearchValue}
+      />
       <About />
       {/* Commented Line */}
       <RecommendationsCell />

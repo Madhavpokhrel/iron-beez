@@ -16,17 +16,19 @@ import {
   IoIosArrowDropleftCircle,
 } from 'react-icons/io';
 import Vector from '../../assets/images/Vector.png';
-import axios from 'axios';
 import { Link } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
 
-// import MapContainer from '../MapContainer/MapContainer';
+import MapContainer from '../MapContainer/MapContainer';
 import ProductsNavBar from '../ProductsNavBar/ProductsNavBar';
 import EquipementCard from '../EquipmentCard/EquipementCard';
+import { loadProductsList } from '../Actions/ProductsAction';
 
-export const ProductsListCell = ({ equipments }) => {
+export const ProductsListCell = ({ zipCodeValue, searchValue }) => {
+  const products = useSelector(state => state.products.products);
+  const dispatch = useDispatch();
   const [toggleLocation, setToggleLocation] = useState(false);
   const [toggleFilters, setToggleFilters] = useState(true);
-  const [products, setProducts] = useState([]);
   const locationToggler = () => {
     setToggleLocation(!toggleLocation);
   };
@@ -36,26 +38,17 @@ export const ProductsListCell = ({ equipments }) => {
   useEffect(() => {
     const start = Math.floor(Math.random() * (5 - 0 + 1) + 0);
     console.log('start =>', start);
-    const fetchProductsListingApi = async () => {
-      const result = await axios.get(
-        `http://marketcheck-prod.apigee.net/v2/search/heavy-equipment/active?api_key=OMOV4Xoz9GXONrwlv6dvtvRuJeps33T3&search_text=turbo&zip=74116`,
-        {
-          headers: {
-            'Content-Type': 'application/json',
-          },
-        }
-      );
+    dispatch(loadProductsList(zipCodeValue, searchValue));
+  }, [dispatch, zipCodeValue, searchValue]);
 
-      setProducts(result.data.listings);
-    };
-    fetchProductsListingApi();
-  }, []);
   return (
     <>
       <Box bgColor="#EFEFEF">
         {toggleLocation ? (
           <Flex>
-            <Box>{/* <MapContainer /> */}</Box>
+            <Box>
+              <MapContainer />
+            </Box>
             <Box>
               <Center>
                 <Flex
@@ -123,8 +116,8 @@ export const ProductsListCell = ({ equipments }) => {
                 <Grid width="90%" templateColumns="repeat(2, 3fr)" gap={0}>
                   {products.map(item => {
                     return (
-                      <Link to="/product-detail">
-                        <EquipementCard item={item} key="products" />
+                      <Link to="/product-detail/:id">
+                        <EquipementCard item={item.id} key={item.id} />
                       </Link>
                     );
                   })}
@@ -296,8 +289,8 @@ export const ProductsListCell = ({ equipments }) => {
               <Grid width="90%" templateColumns="repeat(4, 3fr)" gap={0}>
                 {products.map(item => {
                   return (
-                    <Link to="/product-detail">
-                      <EquipementCard item={item} key="products" />
+                    <Link to="/product-detail/:id">
+                      <EquipementCard item={item} key={item.id} />
                     </Link>
                   );
                 })}
@@ -472,8 +465,8 @@ export const ProductsListCell = ({ equipments }) => {
                 <Grid width="90%" templateColumns="repeat(3, 3fr)" gap={0}>
                   {products.map(item => {
                     return (
-                      <Link to="/product-detail">
-                        <EquipementCard item={item} key="products" />
+                      <Link to="/product-detail/:id">
+                        <EquipementCard item={item} key={item.id} />
                       </Link>
                     );
                   })}
