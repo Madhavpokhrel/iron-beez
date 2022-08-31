@@ -2,8 +2,14 @@ import { Box, Button, Flex, HStack, Image, Center } from '@chakra-ui/react';
 import { Link } from 'react-router-dom';
 
 import logo from '../../assets/Image/Iron-logo.png';
-
+import {
+  setLoginTab,
+  setSignupTab
+} from '../../store/features/Tab/TabSlice';
+import { useDispatch } from 'react-redux';
 const Header = () => {
+
+  const dispatch = useDispatch();
   return (
     <Center
       height={{ base: '8vh', sm: '10vh', md: '12vh', lg: '12vh' }}
@@ -30,6 +36,7 @@ const Header = () => {
             marginRight={{ base: '0.3rem', lg: '1rem' }}
             bg={'none'}
             fontSize={{ base: '14px', sm: '16px', md: '17px', lg: '18px' }}
+            onClick={()=>dispatch(setLoginTab())}
           >
             <Link to="/auth">Login</Link>
           </Button>
@@ -43,6 +50,7 @@ const Header = () => {
             color="white"
             pl="3rem"
             pr="3rem"
+            onClick={()=>dispatch(setSignupTab())}
           >
             <Link to="/auth">Signup</Link>
           </Button>

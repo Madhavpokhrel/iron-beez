@@ -62,14 +62,22 @@ const LoginForm = () => {
   };
 
   return (
-    <Flex height={'60vh'} m={(6, 6, 6, 6)}>
+    <Flex height={'50vh'} m={(6, 6, 6, 6)}>
       <div>
         <div>
           <div>
             <form onSubmit={handleSubmit}>
-              <FormLabel>Email</FormLabel>
+              <FormLabel
+                style={{
+                  color: '#858585',
+                  fontWeight: '500',
+                }}
+              >
+                Email
+              </FormLabel>
               <Input
-                style={{ width: '500px' }}
+                borderRadius={0}
+                width={'100%'}
                 name="username"
                 className="rw-input"
                 placeholder="Enter Your Email"
@@ -78,9 +86,18 @@ const LoginForm = () => {
 
               <FormErrorMessage className="rw-field-error" />
 
-              <FormLabel>Password</FormLabel>
+              <FormLabel
+                style={{
+                  color: '#858585',
+                  fontWeight: '500',
+                  paddingTop: '1rem',
+                }}
+              >
+                Password
+              </FormLabel>
               <Input
-                style={{ width: '500px' }}
+                borderRadius={0}
+                width={{ base: '100%', md: '500px' }}
                 name="password"
                 className="rw-input"
                 placeholder="Enter your Password"
@@ -90,18 +107,30 @@ const LoginForm = () => {
 
               <FormErrorMessage />
               <Box mt={3} fontWeight={'bold'}>
-                <Link>Forgot Your Password?</Link>
+                <Link
+                  style={{
+                    color: '#858585',
+                    fontWeight: '500',
+                    paddingTop: '1rem',
+                  }}
+                >
+                  Forgot Your Password?
+                </Link>
               </Box>
 
               <Button
                 bg={'#4C956C'}
                 color={'white'}
                 mt={5}
-                width="100%"
                 type="submit"
+                width={{ base: '100%', md: '500px' }}
+                style={{
+                  height: '44px',
+                }}
+                _hover={{ bgColor: '#4C956C' }}
                 // onClick={() => setIsSignin(true)}
               >
-                <Text fontWeight={'bold'}>Sign in</Text>
+                <Text fontWeight={'700'}>Sign in</Text>
               </Button>
             </form>
             <Box textAlign={'center'} mt={3}>
@@ -119,10 +148,14 @@ const LoginForm = () => {
           bg={'#D68C45'}
           color={'white'}
           mt={5}
-          width="100%"
+          width={{ base: '100%', md: '500px' }}
+          style={{
+            height: '44px',
+          }}
+          _hover={{ bgColor: '#D68C45' }}
           // onClick={onContinueWithEmail}
         >
-          <Text color={'white'} fontWeight={'bold'}>
+          <Text color={'white'} fontWeight={'700'}>
             Continue with Email
           </Text>
         </Button>

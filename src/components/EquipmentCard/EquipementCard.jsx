@@ -10,14 +10,17 @@ import {
 import { MdLocationOn } from 'react-icons/md';
 
 const EquipementCard = props => {
+
   return (
     <>
       <Stack boxShadow="md" p="10px" m="5px" borderRadius="7px" bgColor="white">
-        <Box boxSize={'230px'}>
+        <Box boxSize={'230px'} height={'50%'}>
           <Image
             size="28rem"
-            src={props.item.media.photo_links[0]}
+            src={props.item.media?.photo_links[0]}
             alt={props.item.heading}
+            width={'100%'}
+            height={'100%'}
           />
         </Box>
         <Tooltip

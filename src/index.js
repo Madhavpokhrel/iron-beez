@@ -2,23 +2,13 @@ import React from 'react';
 import { ColorModeScript, ChakraProvider, theme } from '@chakra-ui/react';
 import * as ReactDOM from 'react-dom/client';
 import App from './App';
-import allReducers from './components/Reducers';
 import reportWebVitals from './reportWebVitals';
 import * as serviceWorker from './serviceWorker';
 import { Provider } from 'react-redux/es/exports';
-import {
-  legacy_createStore as createStore,
-  applyMiddleware,
-} from '@reduxjs/toolkit';
-import { composeWithDevTools } from 'redux-devtools-extension';
-import thunk from 'redux-thunk';
+import store from './store/index';
 
 const container = document.getElementById('root');
 const root = ReactDOM.createRoot(container);
-const store = createStore(
-  allReducers,
-  composeWithDevTools(applyMiddleware(thunk))
-);
 
 root.render(
   <React.StrictMode>

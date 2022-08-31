@@ -12,7 +12,8 @@ import {
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import axios from 'axios';
-
+import { setLoginTab } from '../../store/features/Tab/TabSlice';
+import { useDispatch } from 'react-redux';
 const initialState = {
   firstName: '',
   lastName: '',
@@ -27,6 +28,7 @@ const AuthForm = () => {
   const [isSignup, setIsSignup] = useState(true);
   const firstRef = useRef(null);
   const lastRef = useRef(null);
+  const dispatch = useDispatch();
 
   const handleChange = e => {
     setSignupForm({ ...signupForm, [e.target.name]: e.target.value });
@@ -78,6 +80,11 @@ const AuthForm = () => {
     }
   };
 
+  const labelStyle = {
+    color: '#858585',
+    fontWeight: '500',
+  };
+
   return (
     <>
       <Flex ml={5} mr={5}>
@@ -87,9 +94,14 @@ const AuthForm = () => {
               <form onSubmit={handleSubmit}>
                 <HStack spacing={6}>
                   <VStack alignItems={'start'}>
-                    <FormLabel>First name</FormLabel>
+                    <FormLabel style={labelStyle} margin={0}>
+                      First name
+                    </FormLabel>
                     <Input
-                      style={{ width: '411px' }}
+                      borderRadius={0}
+                      marginTop={0}
+                      width={{ base: '100%', lg: '411px' }}
+                      style={{ marginTop: '0', marginBottom: '7px' }}
                       name="firstName"
                       className="rw-input"
                       ref={firstRef}
@@ -99,8 +111,12 @@ const AuthForm = () => {
                     />
                     <FormErrorMessage />
 
-                    <FormLabel>Phone number</FormLabel>
+                    <FormLabel style={labelStyle} margin={0}>
+                      Phone number
+                    </FormLabel>
                     <Input
+                      borderRadius={0}
+                      style={{ marginTop: '0', marginBottom: '7px' }}
                       name="phoneNumber"
                       className="rw-input"
                       ref={lastRef}
@@ -109,8 +125,12 @@ const AuthForm = () => {
                       required
                     />
                     <FormErrorMessage />
-                    <FormLabel>Password</FormLabel>
+                    <FormLabel style={labelStyle} margin={0}>
+                      Password
+                    </FormLabel>
                     <Input
+                      borderRadius={0}
+                      style={{ marginTop: '0', marginBottom: '7px' }}
                       name="password"
                       className="rw-input"
                       placeholder="Enter Your Password"
@@ -121,9 +141,13 @@ const AuthForm = () => {
                     <FormErrorMessage />
                   </VStack>
                   <VStack alignItems={'start'}>
-                    <FormLabel>Last name</FormLabel>
+                    <FormLabel style={labelStyle} margin={0}>
+                      Last name
+                    </FormLabel>
                     <Input
-                      style={{ width: '411px' }}
+                      borderRadius={0}
+                      style={{ marginTop: '0', marginBottom: '7px' }}
+                      width={{ base: '100%', lg: '411px' }}
                       name="lastName"
                       className="rw-input"
                       placeholder="Enter Your LastName"
@@ -131,9 +155,13 @@ const AuthForm = () => {
                       required
                     />
                     <FormErrorMessage />
-                    <FormLabel>Email</FormLabel>
+                    <FormLabel style={labelStyle} margin={0}>
+                      Email
+                    </FormLabel>
                     <Input
-                      style={{ width: '411px' }}
+                      borderRadius={0}
+                      style={{ marginTop: '0', marginBottom: '7px' }}
+                      width={{ base: '100%', lg: '411px' }}
                       name="email"
                       className="rw-input"
                       placeholder="Enter Your Email"
@@ -141,8 +169,13 @@ const AuthForm = () => {
                       required
                     />
                     <FormErrorMessage />
-                    <FormLabel>Confirm Password</FormLabel>
+                    <FormLabel style={labelStyle} margin={0}>
+                      Confirm Password
+                    </FormLabel>
                     <Input
+                      borderRadius={0}
+                      style={{ marginTop: '0', marginBottom: '7px' }}
+                      width={{ base: '100%', lg: '411px' }}
                       name="confirmPassword"
                       placeholder="Confirm Your Password"
                       autoComplete="current-password"
@@ -153,9 +186,13 @@ const AuthForm = () => {
                 </HStack>
                 <Flex justifyContent={'center'}>
                   <VStack alignItems={'start'}>
-                    <FormLabel>Zip code</FormLabel>
+                    <FormLabel style={labelStyle} margin={0}>
+                      Zip code
+                    </FormLabel>
                     <Input
-                      style={{ width: '411px' }}
+                      borderRadius={0}
+                      style={{ marginTop: '0', marginBottom: '7px' }}
+                      width={{ base: '100%', lg: '411px' }}
                       name="zipCode"
                       className="rw-input"
                       placeholder="Enter Your ZipCode"
@@ -173,9 +210,13 @@ const AuthForm = () => {
                     mt={5}
                     width="60%"
                     type="submit"
+                    style={{
+                      height: '44px',
+                    }}
                     onClick={() => setIsSignup(true)}
+                    _hover={{ bgColor: '#4C956C' }}
                   >
-                    <Text fontWeight={'bold'}>Sign Up</Text>
+                    <Text fontWeight={'700'}>Sign Up</Text>
                   </Button>
 
                   <div
@@ -183,11 +224,12 @@ const AuthForm = () => {
                     style={{ marginTop: '1.5rem' }}
                   >
                     <HStack>
-                      <span>Already have an account?</span>
+                      <span style={labelStyle}>Already have an account?</span>
                       <Text
                         cursor="pointer"
                         className="rw-link"
                         style={{ color: '#D68C45', fontWeight: 'bold' }}
+                        onClick={() => dispatch(setLoginTab())}
                       >
                         Signin
                       </Text>

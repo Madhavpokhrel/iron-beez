@@ -24,9 +24,60 @@ const Footer = () => {
       <Stack
         bg="#064789"
         w="100%"
-        height={{ base: '14', sm: '14', md: '12', lg: '12' }}
+        // height={{ base: '14', sm: '14', md: '12', lg: '12' }}
+        height={{base:'auto',md:'58px'}}
       >
-        <Flex alignItems={'center'}>
+        <Flex alignItems={'center'} direction={{base:"column",md:'row'}} overflowX='hidden'>
+          <Box
+            mt={'4px'}
+            ml={{ base: '1', sm: '3', md: '4', lg: '4' }}
+            width={{base:'100%',md:'fit-content'}}
+            direction='row'
+          >
+            <Text
+              color="white"
+              fontWeight="bold"
+              fontSize={{ base: '18px'}}
+            >
+              Subscribe Our Newslater
+            </Text>
+          </Box>
+          <HStack
+            mt={2}
+            flexGrow={1}
+            ml={{ base: '2%', sm: '2%', md: '15%', lg: '19%' }}
+            mb={{ base: '2%', sm: '2%', md: '0' }}
+            spacing={{ base: '2', sm: '3', md: '5', lg: '5' }}
+            alignItems={'center'}
+            direction='row'
+            width={{base:'100%',md:'fit-content'}}
+          >
+            <FormControl
+              width={{ base: '55%', sm: '60%', md: '50%', lg: '55%' }}
+              bg={'white'}
+              rounded={8}
+            >
+              <Input
+                id="email"
+                type="email"
+                isRequired
+                placeholder={'Email'}
+                size="36px"
+                padding={'2'}
+              />
+            </FormControl>
+            <Button
+              colorScheme="teal"
+              width={{ base: '78px', sm: '90px', md: '130px', lg: '130px' }}
+              height={'7'}
+              rounded={'2'}
+              padding='1.2rem'
+            >
+              Subscribe
+            </Button>
+          </HStack>
+        </Flex>
+        {/* <Flex alignItems={'center'}>
           <Text
             ml={{ base: '1', sm: '3', md: '4', lg: '4' }}
             color="white"
@@ -55,6 +106,7 @@ const Footer = () => {
                 isRequired
                 placeholder={'Email'}
                 size="36px"
+                padding={'2'}
               />
             </FormControl>
             <Button
@@ -66,7 +118,7 @@ const Footer = () => {
               Subscribe
             </Button>
           </HStack>
-        </Flex>
+        </Flex> */}
       </Stack>
       <Flex>
         <Box

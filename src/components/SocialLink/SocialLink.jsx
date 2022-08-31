@@ -3,7 +3,7 @@ import { Box, HStack, Text, Link, Center, Img } from '@chakra-ui/react';
 
 import Email from '../../assets/Image/email.png';
 import Facebook from '../../assets/Image/facebook.png';
-import Instagram from '../../assets/Image/Instagram.png';
+import Instagram from '../../assets/Image/instagram.png';
 import Post from '../../assets/Image/post.png';
 import Twitter from '../../assets/Image/twitter.png';
 

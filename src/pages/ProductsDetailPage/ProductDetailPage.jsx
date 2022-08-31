@@ -13,10 +13,11 @@ import axios from 'axios';
 
 const ProductsDetailPage = () => {
   const [productsDetail, setProductsDetail] = useState([]);
+  const MARKETPLACE_API_KEY = process.env.REACT_APP_MARKETPLACE_API_KEY;
   useEffect(() => {
     const fetchProductsDetailApi = async id => {
       const result = await axios.get(
-        `http://marketcheck-prod.apigee.net/v2/search/heavy-equipment/active?api_key=OMOV4Xoz9GXONrwlv6dvtvRuJeps33T3&search_text=turbo&zip=74116${id}`,
+        `http://marketcheck-prod.apigee.net/v2/search/heavy-equipment/active?api_key=${MARKETPLACE_API_KEY}&search_text=turbo&zip=74116${id}`,
         {
           headers: {
             'Content-Type': 'application/json',

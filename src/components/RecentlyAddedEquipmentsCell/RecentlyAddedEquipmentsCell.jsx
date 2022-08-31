@@ -24,14 +24,16 @@ const sideScroll = (element, speed, distance, step) => {
 export const RecentlyAddedEquipmentsCell = () => {
   const contentWrapper = useRef(null);
   const [recentlyAddedEquipment, setRecentlyAddedEquipment] = useState([]);
+  const MARKETPLACE_API_KEY = process.env.REACT_APP_MARKETPLACE_API_KEY;
 
   useEffect(() => {
     const start = Math.floor(Math.random() * (5 - 0 + 1) + 0);
     const price = Math.floor(Math.random() * (30000 - 1000 + 1) + 1000);
     console.log('start =>', start);
+
     const fetchRecentlyAddedEquipmentApi = async () => {
       const result = await axios.get(
-        `http://marketcheck-prod.apigee.net/v2/search/heavy-equipment/active?price_range=${price}&start=${start}&rows=10&api_key=OMOV4Xoz9GXONrwlv6dvtvRuJeps33T3`,
+        `http://marketcheck-prod.apigee.net/v2/search/heavy-equipment/active?price_range=${price}&start=${start}&rows=10&api_key=${MARKETPLACE_API_KEY}`,
         {
           headers: {
             'Content-Type': 'application/json',
@@ -66,7 +68,7 @@ export const RecentlyAddedEquipmentsCell = () => {
             Recently Added
           </Text>
         </Box>
-        <Flex>
+        <Flex width={'100%'} justify='center'>
           <Box
             display="flex"
             flexDirection="column"

@@ -22,7 +22,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import MapContainer from '../MapContainer/MapContainer';
 import ProductsNavBar from '../ProductsNavBar/ProductsNavBar';
 import EquipementCard from '../EquipmentCard/EquipementCard';
-import { loadProductsList } from '../Actions/ProductsAction';
+// import { loadProductsList } from '../Actions/ProductsAction';
+import { loadProductsList } from '../../store/features/products/ProductsSlice';
 
 export const ProductsListCell = ({ zipCodeValue, searchValue }) => {
   const products = useSelector(state => state.products.products);

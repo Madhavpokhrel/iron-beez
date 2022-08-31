@@ -22,13 +22,14 @@ const sideScroll = (element, speed, distance, step) => {
 export const RecommendationsCell = () => {
   const contentWrapper = useRef(null);
   const [recomended, setRecomended] = useState([]);
+  const MARKETPLACE_API_KEY = process.env.REACT_APP_MARKETPLACE_API_KEY;
 
   useEffect(() => {
     const start = Math.floor(Math.random() * (5 - 0 + 1) + 0);
     console.log('start =>', start);
     const fetchRecommendedApi = async () => {
       const result = await axios.get(
-        `http://marketcheck-prod.apigee.net/v2/search/heavy-equipment/active?price_range=1000-30000&start=${start}&rows=10&api_key=OMOV4Xoz9GXONrwlv6dvtvRuJeps33T3`,
+        `http://marketcheck-prod.apigee.net/v2/search/heavy-equipment/active?price_range=1000-30000&start=${start}&rows=10&api_key=${MARKETPLACE_API_KEY}`,
         {
           headers: {
             'Content-Type': 'application/json',
@@ -61,8 +62,7 @@ export const RecommendationsCell = () => {
             Recommended
           </Text>
         </Box>
-
-        <Flex>
+        <Flex width={'100%'} justify='center'>
           <Box
             display="flex"
             flexDirection="column"
