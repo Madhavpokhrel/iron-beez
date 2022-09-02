@@ -11,20 +11,13 @@ import {
 } from '@chakra-ui/react';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import axios from 'axios';
 import { setLoginTab } from '../../store/features/Tab/TabSlice';
-import { useDispatch } from 'react-redux';
-const initialState = {
-  firstName: '',
-  lastName: '',
-  phoneNumber: '',
-  email: '',
-  zipCode: '',
-  password: '',
-};
+import { useDispatch, useSelector } from 'react-redux';
+import { registerUser } from '../../store/features/User/userRegisterSlice';
 
 const AuthForm = () => {
-  const [signupForm, setSignupForm] = useState(initialState);
+  const state = useSelector(state => state.userRegister);
+  const [signupForm, setSignupForm] = useState([]);
   const [isSignup, setIsSignup] = useState(true);
   const firstRef = useRef(null);
   const lastRef = useRef(null);
@@ -39,45 +32,23 @@ const AuthForm = () => {
   };
 
   const FailedRegister = () => {
-    toast.error(' Register Unsuccesfully', { position: 'top-center' });
+    toast.error('Register Unsuccesfully', { position: 'top-center' });
   };
+
+  const { loading, signupUser, error } = state;
 
   const handleSubmit = async e => {
     e.preventDefault();
     e.target.reset();
 
-    if (isSignup) {
-      console.log('signupData =>', signupForm);
-
-      try {
-        const result = await axios.post(
-          'http://localhost:5000/api/sign-up',
-
-          JSON.stringify({
-            firstName: signupForm.firstName,
-            lastName: signupForm.lastName,
-            phoneNumber: signupForm.phoneNumber,
-            email: signupForm.email,
-            password: signupForm.password,
-            zipCode: signupForm.zipCode,
-          }),
-          {
-            headers: { 'Content-Type': 'application/json' },
-            withCredentials: true,
-          }
-        );
-
-        if (result.response.status == 201) {
-          toast.success('Register Successfully!', { position: 'top-center' });
-        }
-      } catch (e) {
-        console.log('error => ', e);
-
-        FailedRegister();
-      }
-    } else {
-      console.log('signin data');
+    dispatch(registerUser({ signupForm }));
+    if (!error) {
+      SuccesfullyRegister();
     }
+    if (error) {
+      FailedRegister();
+    }
+
   };
 
   const labelStyle = {

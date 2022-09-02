@@ -92,7 +92,7 @@ export const RecentlyAddedEquipmentsCell = () => {
             paddingLeft="10px"
           >
             {recentlyAddedEquipment.map(item => {
-              return <EquipementCard key={item.id} item={item} />;
+              return <EquipementCard key={item.id} item={item} theme={'dark'} />;
             })}
           </Flex>
           <Box

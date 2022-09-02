@@ -7,7 +7,7 @@ import {
 import EquipementCard from '../EquipmentCard/EquipementCard';
 import axios from 'axios';
 
-const sideScroll = (element, speed, distance, step) => {
+export const sideScroll = (element, speed, distance, step) => {
   let scrollAmount = 0;
 
   const slideTimer = setInterval(() => {

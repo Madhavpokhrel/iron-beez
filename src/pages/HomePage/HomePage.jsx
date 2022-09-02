@@ -4,7 +4,7 @@ import Footer from '../../components/Footer/Footer';
 import Header from '../../components/Header/Header';
 import { RecommendationsCell } from '../../components/RecommendationsCell/RecommendationsCell';
 import { RecentlyAddedEquipmentsCell } from '../../components/RecentlyAddedEquipmentsCell/RecentlyAddedEquipmentsCell';
-// import About from '../../components/About/About';
+import RecentArticle from '../../components/RecentArticle/RecentArticle';
 
 const HomePage = ({
   zipCodeValue,
@@ -25,7 +25,7 @@ const HomePage = ({
       {/* Commented Line */}
       <RecommendationsCell />
       <RecentlyAddedEquipmentsCell />
-      {/* <ArticlesCell /> */}
+      <RecentArticle />
       <Footer />
     </>
   );

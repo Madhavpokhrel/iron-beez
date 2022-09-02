@@ -12,7 +12,8 @@ import {
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import axios from 'axios';
-
+import { loginUser } from '../../store/features/User/userSigninSlice';
+import { useDispatch, useSelector } from 'react-redux';
 const initialState = {
   email: '',
   password: '',
@@ -20,8 +21,8 @@ const initialState = {
 
 const LoginForm = () => {
   const [signinForm, setSigninForm] = useState(initialState);
-  const [isSignin, setIsSignin] = useState(true);
 
+  const dispatch = useDispatch();
   const handleChange = e => {
     setSigninForm({ ...signinForm, [e.target.name]: e.target.value });
   };
@@ -33,30 +34,20 @@ const LoginForm = () => {
     toast.error(' Register Unsuccesfully', { position: 'top-center' });
   };
 
+  const state = useSelector(state => state.userSignin);
+  console.log(state);
+  const { loading, userSignin, error } = state;
+
   const handleSubmit = async e => {
     e.preventDefault();
     e.target.reset();
 
-    try {
-      const result = await axios.post(
-        'http://localhost:5000/api/sign-in',
+    dispatch(loginUser({ signinForm }));
 
-        JSON.stringify({
-          email: signinForm.email,
-          password: signinForm.password,
-        }),
-        {
-          headers: { 'Content-Type': 'application/json' },
-          withCredentials: true,
-        }
-      );
-
-      if (result.response.status == 201) {
-        SuccesfullyRegister();
-      }
-    } catch (e) {
-      console.log('error => ', e);
-
+    if (!error) {
+      SuccesfullyRegister();
+    }
+    if (error) {
       FailedRegister();
     }
   };
@@ -78,7 +69,7 @@ const LoginForm = () => {
               <Input
                 borderRadius={0}
                 width={'100%'}
-                name="username"
+                name="email"
                 className="rw-input"
                 placeholder="Enter Your Email"
                 onChange={handleChange}

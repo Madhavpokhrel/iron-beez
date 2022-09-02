@@ -9,6 +9,7 @@ import LoginPage from './pages/LoginPage/LoginPage';
 import ProductsDetailPage from './pages/ProductsDetailPage/ProductDetailPage';
 import ProductsListingPage from './pages/ProductsListingPage/ProductsListingPage';
 import { useLocation } from 'react-router-dom';
+import UserDetailPage from './pages/UserDetailPage/UserDetailPage';
 
 function App() {
   // const location = useLocation();
@@ -32,6 +33,7 @@ function App() {
           />
 
           <Route path="/auth" element={<LoginPage />} />
+          <Route path="/profile" element={<UserDetailPage />} />
           <Route path="/product-detail" element={<ProductsDetailPage />} />
           <Route
             path="/product-listing"

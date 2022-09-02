@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Flex, Box } from '@chakra-ui/react';
+import { Flex, Box, Center, Text } from '@chakra-ui/react';
 // import FeaturedItemsCell from 'src/components/FeaturedItemsCell'
 // import Footer from 'src/components/Footer/Footer'
 import SocialLink from '../../components/SocialLink/SocialLink';
@@ -17,7 +17,7 @@ const ProductsDetailPage = () => {
   useEffect(() => {
     const fetchProductsDetailApi = async id => {
       const result = await axios.get(
-        `http://marketcheck-prod.apigee.net/v2/search/heavy-equipment/active?api_key=${MARKETPLACE_API_KEY}&search_text=turbo&zip=74116${id}`,
+        `http://marketcheck-prod.apigee.net/v2/search/heavy-equipment/active?api_key=${MARKETPLACE_API_KEY}&search_text=turbo&zip=74116${(id)}`,
         {
           headers: {
             'Content-Type': 'application/json',
@@ -32,6 +32,15 @@ const ProductsDetailPage = () => {
   return (
     <>
       <Header />
+      <Center width="100%" height="12vh">
+        <Flex width="90%" justifyContent="space-between">
+          <Center>
+            <Text color="#949494" fontSize="20px" fontWeight="500">
+              Home/Products/Item
+            </Text>
+          </Center>
+        </Flex>
+      </Center>
       <Flex
         px={{ base: '10', sm: '20', md: '20', lg: '20' }}
         mt={{ base: '5', sm: '9', md: '10', lg: '10' }}

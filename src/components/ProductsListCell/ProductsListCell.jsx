@@ -23,7 +23,8 @@ import MapContainer from '../MapContainer/MapContainer';
 import ProductsNavBar from '../ProductsNavBar/ProductsNavBar';
 import EquipementCard from '../EquipmentCard/EquipementCard';
 // import { loadProductsList } from '../Actions/ProductsAction';
-import { loadProductsList } from '../../store/features/products/ProductsSlice';
+// import { loadProductsList } from '../../store/features/products/ProductsSlice';
+import { fetchProductList } from '../../store/features/products/ProductsSlice';
 
 export const ProductsListCell = ({ zipCodeValue, searchValue }) => {
   const products = useSelector(state => state.products.products);
@@ -39,7 +40,7 @@ export const ProductsListCell = ({ zipCodeValue, searchValue }) => {
   useEffect(() => {
     const start = Math.floor(Math.random() * (5 - 0 + 1) + 0);
     console.log('start =>', start);
-    dispatch(loadProductsList(zipCodeValue, searchValue));
+    dispatch(fetchProductList( {zipCodeValue, searchValue} ));
   }, [dispatch, zipCodeValue, searchValue]);
 
   return (
